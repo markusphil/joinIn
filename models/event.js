@@ -18,6 +18,11 @@ const eventSchema = new Schema({
     date: {
         type: Date,
         required: true
+    },
+    //Linking event to user. only one creator!
+    creator: {
+        type: Schema.Types.ObjectId,
+            ref: "User"
     }
 });
 //Exports node.js way
