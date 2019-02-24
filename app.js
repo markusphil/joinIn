@@ -15,6 +15,37 @@ const app = express();
 //add bodyparser with json functionality
 app.use(bodyParser.json());
 
+//custom merger functions taht add mor flexibility then mongoose's .populate() method 
+
+const events = eventIds => {
+    return Event.find({_id: {$in: eventIds} })
+    .then(events => {
+        return events.map(event => {
+            return {...event._doc, _id: event.id, creator: user.bind(this, event.creator)};
+        });
+    })
+    .catch(err => {
+        throw err;
+    })
+};
+
+const user = userId => {
+    return User.findById(userId)
+        .then(user => {
+            return {...user._doc, _id: user.id, createdEvents: events.bind(this, user._doc.createdEvents ) }
+        })
+        .catch(err => {
+            throw err;
+        });
+};
+
+
+
+
+
+
+
+
 app.use(
     '/graphql',
     graphqlHttp({
@@ -25,12 +56,14 @@ app.use(
             description: String!
             price: Float!
             date: String!
+            creator: User!
         }
 
         type User {
             _id: ID!
             email: String!
             password: String
+            createdEvents: [Event!]
         }
 
         input EventInput {
@@ -65,7 +98,8 @@ app.use(
            return Event.find().then(events => {
                 return events.map(event => {
                     //_doc is a mongoose feature that returns the MongoDB data without unnessecary metadata
-                    return {...event._doc, _id: event.id}
+                    //event.id is another mongoose feature that reaturns the id as string and not as object id. But it seems that it now works automaticly?
+                    return {...event._doc, _id: event.id, creator: user.bind(this, event._doc.creator)}
                 })
             }).catch(err => {
                 throw err
@@ -83,7 +117,7 @@ app.use(
             return event
             .save()
             .then(result => {
-                createdEvent = {...result._doc, _id: result.id};
+                createdEvent = {...result._doc, _id: result.id, creator: user.bind(this, result._doc.creator)};
                 return User.findById('5c71b81104597b1694441f84') 
             })
             .then(user => {
