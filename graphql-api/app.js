@@ -15,6 +15,18 @@ const app = express();
 
 //add bodyparser with json functionality
 app.use(bodyParser.json());
+
+//configure CORS access
+app.use((req,res,next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');     //allow requests from any origin
+    res.setHeader('Access-Control-Allow-Methos', 'POST,GET,OPTIONS'); //allow methods. OPTIONS is a standard-action modern browsers perfom
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') { //Handle the OPTIONS Request
+        return res.sendStatus(200); 
+    }
+    next();
+})
+
 //add custombuild authentification-middleware
 app.use(isAuth);
 //configure graphQL with shema and resolvers
@@ -30,7 +42,7 @@ app.use(
 //Use mongoose to connect with MongoDB cluster
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:kH7ZFUffTx3R9v0q@graphql-tutorial-egoz3.mongodb.net/${process.env.MONGO_DB}?retryWrites=true`)
     .then( () => {
-        app.listen(3000);
+        app.listen(8000);
     })
     .catch(err =>{console.log(err);})
 
