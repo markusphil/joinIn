@@ -1,5 +1,6 @@
 //Import models
 const Event = require('../../models/event');
+const User = require('../../models/user');
 //Import helpers
 const {transformedEvent} = require('./utils')
 
@@ -17,19 +18,22 @@ module.exports = {
             throw err;
         }
     },
-    createEvent: async args => {
+    createEvent: async (args, req) => {
+        if (!req.isAuth){
+            throw new Error('You must be logged in to create an event')
+        }
         const event = new Event({
             title: args.eventInput.title,
             description: args.eventInput.description,
             price: +args.eventInput.price,
             date: new Date(args.eventInput.date),
-            creator: '5c7670b73f33bd2c880883b4'
+            creator: req.userId
         });
         let createdEvent;
         try {
         const result = await event.save()
             createdEvent = transformedEvent(result);
-            const creator = await User.findById('5c7670b73f33bd2c880883b4'); 
+            const creator = await User.findById(req.userId); 
 
             if (!creator) {
                 throw new Error ('User not found.')

@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHttp = require('express-graphql');
 const mongoose = require('mongoose');
-
+//Import middleware
+const isAuth = require('./middleware/is-auth')
 //Import schema
 const graphqlSchema = require('./graphql/schema/index')
 //Import resolvers
@@ -14,7 +15,8 @@ const app = express();
 
 //add bodyparser with json functionality
 app.use(bodyParser.json());
-
+//add custombuild authentification-middleware
+app.use(isAuth);
 //configure graphQL with shema and resolvers
 app.use(
     '/graphql',
