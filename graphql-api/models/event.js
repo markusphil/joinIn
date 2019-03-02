@@ -19,6 +19,10 @@ const eventSchema = new Schema({
         type: Date,
         required: true
     },
+    image: {
+        type: String,
+        required: false
+    },
     //Linking event to user. only one creator!
     creator: {
         type: Schema.Types.ObjectId,
