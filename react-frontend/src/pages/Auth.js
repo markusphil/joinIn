@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AuthContext from '../context/auth-context';
 
 class AuthPage extends Component {
     constructor(props){
@@ -9,6 +10,8 @@ class AuthPage extends Component {
     state = {
         isLogin: true
     };
+
+    static contextType = AuthContext;
     
     switchModeHandler = () => {
         this.setState( state => {
@@ -63,7 +66,13 @@ class AuthPage extends Component {
             return res.json();
         })
         .then(resData => {
-            console.log(resData); //at this point we are not doing anything with the date so we just log it.
+            if (resData.data.login.token) { //if token is valid, call the context login Method with the received auth-data
+                this.context.login(
+                    resData.data.login.token,
+                    resData.data.login.userId,
+                    resData.data.login.tokenExpiration
+                );
+            }
         })
         .catch(err => {
             console.log(err);
