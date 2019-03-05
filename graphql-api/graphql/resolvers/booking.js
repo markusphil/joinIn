@@ -8,7 +8,7 @@ const {transformedBooking, transformedEvent} = require('./utils')
 module.exports = {
     bookings: async (args, req) => {
         if (!req.isAuth){
-            throw new Error('You must be logged in to create an event')
+            throw new Error('You must be logged in to see bookings')
         }
         try {
             const bookings = await Booking.find();
@@ -21,7 +21,7 @@ module.exports = {
     },
     bookEvent: async (args, req) => {
         if (!req.isAuth){
-            throw new Error('You must be logged in to create an event')
+            throw new Error('You must be logged in to book an event')
         }
         const fetchedEvent = await Event.findOne({ _id: args.eventId });
         const booking = new Booking({
@@ -33,7 +33,7 @@ module.exports = {
     },
     cancelBooking: async (args, req) => {
         if (!req.isAuth){
-            throw new Error('You must be logged in to create an event')
+            throw new Error('You must be logged in to cancel a booking')
         }
         try {
             const booking = await Booking.findById(args.bookingId).populate('event');

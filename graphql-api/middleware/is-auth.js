@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {  //express middleware function profile
         req.isAuth = false; //add new property to the request with value false
         return next(); //exit middleware and forward values
     }
-    const token = authHeader.split('')[1]; //split header on whitespace (Bearer token) and acces Token
+    const token = authHeader.split(' ')[1]; //split header on whitespace (Bearer token) and acces Token
     if (!token || token === ''){ //check if token is not existent or empty
         req.isAuth = false; 
         return next();
@@ -25,6 +25,6 @@ module.exports = (req, res, next) => {  //express middleware function profile
         return next();
     }
     req.isAuth = true;
-    req.userUd = decodedToken.userId; //store userId to the request object
+    req.userId = decodedToken.userId; //store userId to the request object
     next();
 }

@@ -7,3 +7,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/*standard buttons*/
+.form-actions button,
+.btn {
+  border: none;
+  background: rgb(151, 41, 0);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.form-actions button:hover,
+.btn:hover {
+  background: orangered;
+  
+}
+.data-list {
+  width: 40rem;
+  max-width: 90%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  list-style: none
+}
+.list-item {
+  width: 90%;
+  padding: 0.5rem 2rem;
+  margin-bottom: 1rem;
+  border: 1px solid  orangered
+}
