@@ -1,10 +1,8 @@
 import React from 'react';
 
-import './Events.css'
-
 export const EventItem = props =>(
 
-    <li key={props.eventId} className="events-card">
+    <li key={props.eventId} className="data-card">
     <div>
       <h2>{props.title}</h2>
       <p>

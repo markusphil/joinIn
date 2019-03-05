@@ -31,6 +31,16 @@ body {
   flex-direction: column;
   list-style: none
 }
+.data-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  border: 1px solid orangered;
+  padding: 5px;
+  margin-bottom: 5px
+}
 .list-item {
   width: 90%;
   padding: 0.5rem 2rem;

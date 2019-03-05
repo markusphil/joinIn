@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Spinner} from '../components/Spinner/Spinner'
+import {BookingList} from '../components/Bookings/BookingList'
 import AuthContext from '../context/auth-context';
 
 class BookingsPage extends Component {
@@ -55,15 +56,53 @@ class BookingsPage extends Component {
                 this.setState({isLoading:false});
         })
     }
+    deleteBookingHandler = bookingId => {
+
+        const requestBody = {
+            query: `
+             mutation {
+                cancelBooking (bookingId: "${bookingId}") {
+                _id
+                title        
+                }
+            }`
+        };
+
+        fetch('http://localhost:8000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+            'Content-Type':'application/json',
+            Authorization: 'Bearer '+ this.context.token
+            }
+        })
+        .then(res => {
+            if(res.status !==200 && res.status !== 201){ //throw error when status is not ok
+                throw new Error('connection failed!');
+            }
+            return res.json();
+        })
+        .then(resData => {
+            this.setState(prevState => {
+                const updatedBookings = prevState.bookings.filter( booking => {
+                    return booking._id !== bookingId;
+                });
+                return { bookings: updatedBookings}
+            });
+            console.log(resData);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    };
+
 
     render() {
         return (
         <React.Fragment>
             <h1>The Bookings Page</h1>
             {this.state.isLoading && <Spinner/>}
-            {!this.state.isLoading && <ul className="data-list">{this.state.bookings.map(booking => (
-                <li key={booking._id}> {booking.event.title} - Date: {new Date (booking.event.date).toLocaleDateString()} - Booked at: {new Date(booking.createdAt).toLocaleDateString()}</li>)
-            )}</ul>}
+            {!this.state.isLoading && <BookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler}/>}
         </React.Fragment>
         
         )
