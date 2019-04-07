@@ -104,12 +104,12 @@ class EventsPage extends Component {
         this.setState({modalOpen: false});
         const requestBody = {
                 query: `
-                mutation {
+                mutation CreateEvent ($title: String!, $desc:String!, $price: Float!, $date: String!){
                     createEvent(eventInput:{
-                        title: "${title}",
-                        price: ${price},
-                        description: "${description}",
-                        date: "${date}"
+                        title: $title,
+                        price: $price,
+                        description: $desc,
+                        date: $date
                     
                     }) {
                         _id
@@ -118,7 +118,13 @@ class EventsPage extends Component {
                         date
                         price
                     }
-                }`
+                }`,
+                variables: {
+                    title: title,
+                    desc: description, 
+                    price: price,
+                    date: date
+                }
         };
 
         const token = this.context.token;
@@ -171,13 +177,16 @@ class EventsPage extends Component {
         }
         const requestBody = {
             query: `
-             mutation {
-                bookEvent (eventId: "${this.state.selectedEvent._id}") {
+             mutation BookEvent ($id: ID!) {
+                bookEvent (eventId: $id) {
                     _id
                     createdAt
                     updatedAt
                 }
-            }`
+            }`,
+            variables: {
+                id: this.state.selectedEvent._id
+            }
         };
 
         fetch('http://localhost:8000/graphql', {
@@ -204,7 +213,7 @@ class EventsPage extends Component {
     }
 
     render() {
-        
+                
         return (
             <React.Fragment>
                 {(this.state.modalOpen || this.state.selectedEvent) && <Backdrop/>}

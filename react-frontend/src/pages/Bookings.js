@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import {Spinner} from '../components/Spinner/Spinner'
 import {BookingList} from '../components/Bookings/BookingList'
+import {BookingChart} from '../components/Bookings/BookingChart'
+import {BookingTabs} from '../components/Bookings/BookingTabs'
 import AuthContext from '../context/auth-context';
 
 class BookingsPage extends Component {
     state = {
         isLoading: false,
-        bookings: []
+        bookings: [],
+        activeTab: "list"
     }
     static contextType  = AuthContext;
 
@@ -60,12 +63,13 @@ class BookingsPage extends Component {
 
         const requestBody = {
             query: `
-             mutation {
-                cancelBooking (bookingId: "${bookingId}") {
+             mutation CancelBooking($id: ID!) {
+                cancelBooking (bookingId: $id) {
                 _id
                 title        
                 }
-            }`
+            }`,
+            variables: {id: bookingId}
         };
 
         fetch('http://localhost:8000/graphql', {
@@ -96,13 +100,36 @@ class BookingsPage extends Component {
         })
     };
 
+    changeTabHandler = activeTab => {
+        if (activeTab === "list") {
+            this.setState({activeTab: "list"})
+        } else {
+            this.setState({activeTab: "chart"})
+        }
+    }
 
     render() {
+
+        let content = <Spinner />;
+        if (!this.state.isLoading) {
+            content = (
+                <React.Fragment>
+                    <BookingTabs 
+                        activeTab = {this.state.activeTab}
+                        onChange = {this.changeTabHandler}    
+                    />
+                    {this.state.activeTab === "list" ?
+                    <BookingList
+                        bookings={this.state.bookings}
+                        onDelete={this.deleteBookingHandler}
+                    /> : <BookingChart/>}
+                </React.Fragment>
+            )
+        }
         return (
         <React.Fragment>
             <h1>The Bookings Page</h1>
-            {this.state.isLoading && <Spinner/>}
-            {!this.state.isLoading && <BookingList bookings={this.state.bookings} onDelete={this.deleteBookingHandler}/>}
+            {content}
         </React.Fragment>
         
         )
