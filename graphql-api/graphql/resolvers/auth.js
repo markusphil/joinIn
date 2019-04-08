@@ -8,16 +8,17 @@ module.exports = {
     createUser: async args => {
     //prevent the creation of mulitple users with same e-mail
         try {
-        const existingUser = await User.findOne({email: args.userInput.email})
+        const existingUser = await User.findOne({name: args.userInput.name})
             if (existingUser) {
-                throw new Error ('User already exists.')
+                throw new Error ('Username already exists.')
             }
             //using becrypt to create hashed password
             const hashedPassword = await bcrypt.hash(args.userInput.password, 12)
             
             const newUser = new User({
-                email: args.userInput.email,
-                password: hashedPassword
+                name: args.userInput.name,
+                password: hashedPassword,
+                profilePic: args.userInput.profilePic
             });
             const result = await newUser.save();    
                 //setting password to null so that it can't be retrieved.
@@ -27,8 +28,8 @@ module.exports = {
                 throw err
         }
     },
-    login: async ({email, password}) =>{
-        const user = await User.findOne( {email: email});
+    login: async ({name, password}) =>{
+        const user = await User.findOne( {name: name});
         if (!user) {
             throw new Error('User does not exist!')
         }
@@ -36,7 +37,7 @@ module.exports = {
         if (!isEqual) {
             throw new Error('Password is incorrect')
         }
-        const token = jwt.sign({userId: user.id, email:user.email},'somesupersecretkey', {expiresIn: '1h'});
+        const token = jwt.sign({userId: user.id, name:user.name},'somesupersecretkey', {expiresIn: '1h'});
         return { userId: user.id, token: token, tokenExpiration: 1}
     }
 }

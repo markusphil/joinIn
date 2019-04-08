@@ -2,16 +2,14 @@
 const Event = require('../../models/event');
 const User = require('../../models/user');
 //Import helpers
-const {transformedEvent} = require('./utils')
+const {transformEvent} = require('./utils')
 
 module.exports = {
     events: async () => {
         try {
         const events = await Event.find();
             return events.map(event => {
-                //_doc is a mongoose feature that returns the MongoDB data without unnessecary metadata
-                //event.id is another mongoose feature that reaturns the id as string and not as object id. But it seems that it now works automaticly?
-                return transformedEvent(event);
+                return transformEvent(event);
             })
         }
         catch(err) {
@@ -25,14 +23,15 @@ module.exports = {
         const event = new Event({
             title: args.eventInput.title,
             description: args.eventInput.description,
-            price: +args.eventInput.price,
+            location: args.eventInput.location,
             date: new Date(args.eventInput.date),
+            teaserImage: args.eventInput.teaserImage,
             creator: req.userId
         });
         let createdEvent;
         try {
         const result = await event.save()
-            createdEvent = transformedEvent(result);
+            createdEvent = transformEvent(result);
             const creator = await User.findById(req.userId); 
 
             if (!creator) {

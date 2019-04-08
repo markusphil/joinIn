@@ -3,7 +3,7 @@
 const Event = require('../../models/event');
 const Booking = require('../../models/booking');
 //Import helpers
-const {transformedBooking, transformedEvent} = require('./utils')
+const {transformBooking, transformEvent} = require('./utils')
 
 module.exports = {
     bookings: async (args, req) => {
@@ -13,7 +13,7 @@ module.exports = {
         try {
             const bookings = await Booking.find({user: req.userId});
             return bookings.map(booking => {
-                return transformedBooking(booking)
+                return transformBooking(booking)
             });
         } catch(err) {
             throw err;
@@ -29,7 +29,9 @@ module.exports = {
             event: fetchedEvent
         });
         const result = await booking.save();
-        return transformedBooking(result);
+        fetchedEvent.attendees.push(req.userId);
+        await fetchedEvent.save();
+        return transformBooking(result);
     },
     cancelBooking: async (args, req) => {
         if (!req.isAuth){
@@ -37,9 +39,11 @@ module.exports = {
         }
         try {
             const booking = await Booking.findById(args.bookingId).populate('event');
-            const unbookedEvent = transformedEvent(booking.event);
+            const unbookedEvent = booking.event;
+            unbookedEvent.attendees = unbookedEvent.attendees.filter( x => x != req.userId);
+            await unbookedEvent.save(); 
             await Booking.deleteOne({_id: args.bookingId});
-            return unbookedEvent;
+            return transformEvent(unbookedEvent);
         }catch(err){
                 throw err
         }

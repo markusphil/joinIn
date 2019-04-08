@@ -22,9 +22,10 @@ class EventsPage extends Component {
     constructor(props) {
         super(props);
         this.titelRef = React.createRef();
-        this.priceRef = React.createRef();
+        this.locationRef = React.createRef();
         this.dateRef = React.createRef();
         this.descriptionRef = React.createRef();
+        this.teaserImageRef = React.createRef();
     }
     //LifecycleMethods
     componentDidMount() {
@@ -44,10 +45,17 @@ class EventsPage extends Component {
                     title
                     description
                     date
-                    price
+                    location
+                    teaserImage
                     creator {
                         _id
-                        email
+                        name
+                        profilePic
+                    }
+                    attendees {
+                        _id
+                        name
+                        profilePic
                     }
                 }
             }`
@@ -68,6 +76,7 @@ class EventsPage extends Component {
         })
         .then(resData => {
             const events = resData.data.events;
+            console.log(events);
             if (this.isActive) {
                 this.setState({fetchedEvents: events, isLoading:false});
             }
@@ -88,13 +97,14 @@ class EventsPage extends Component {
     };
     confirmModalHandler = () => {
         const title = this.titelRef.current.value;
-        const price = +this.priceRef.current.value;
+        const location = this.locationRef.current.value;
         const date = this.dateRef.current.value;
         const description = this.descriptionRef.current.value;
+        const teaserImage = this.teaserImageRef.current.value;
 
         if (
             title.trim().length === 0 ||
-            price < 0 ||
+            location.trim().length === 0 ||
             date.trim().length === 0 ||
             description.trim().length === 0
         ) {
@@ -104,26 +114,28 @@ class EventsPage extends Component {
         this.setState({modalOpen: false});
         const requestBody = {
                 query: `
-                mutation CreateEvent ($title: String!, $desc:String!, $price: Float!, $date: String!){
+                mutation CreateEvent ($title: String!, $desc:String!, $location: String!, $date: String!, $teaserimage: String!){
                     createEvent(eventInput:{
                         title: $title,
-                        price: $price,
+                        location: $location,
                         description: $desc,
-                        date: $date
+                        date: $date,
+                        teaserImage: $teaserimage
                     
                     }) {
                         _id
                         title
                         description
                         date
-                        price
+                        location
                     }
                 }`,
                 variables: {
                     title: title,
                     desc: description, 
-                    price: price,
-                    date: date
+                    location: location,
+                    date: date,
+                    teaserimage: teaserImage
                 }
         };
 
@@ -151,7 +163,7 @@ class EventsPage extends Component {
                     title: resData.data.createEvent.title,
                     description: resData.data.createEvent.description,
                     date: resData.data.createEvent.date,
-                    price: resData.data.createEvent.price,
+                    location: resData.data.createEvent.location,
                     creator: {
                         _id: this.context.userId
                     }
@@ -233,8 +245,11 @@ class EventsPage extends Component {
                             <label htmlFor="date">Date</label>
                             <input type="datetime-local" id="date" ref={this.dateRef}/>
 
-                            <label htmlFor="price">Price</label>
-                            <input type="number" id="price" ref={this.priceRef}/>
+                            <label htmlFor="location">Location</label>
+                            <input type="text" id="location" ref={this.locationRef}/>
+
+                            <label htmlFor="teaser-img">Teaser Image</label>
+                            <input type="text" id="teaser-img" ref={this.teaserImageRef}/>
 
                             <label htmlFor="description">Description</label>
                             <textarea id="description" rows="4" ref={this.descriptionRef}></textarea>

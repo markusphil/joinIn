@@ -4,8 +4,9 @@ import AuthContext from '../context/auth-context';
 class AuthPage extends Component {
     constructor(props){
         super(props);
-        this.emailRef = React.createRef();
+        this.nameRef = React.createRef();
         this.passwordRef = React.createRef();
+        this.profilePicRef = React.createRef();
     }
     state = {
         isLogin: true
@@ -21,41 +22,44 @@ class AuthPage extends Component {
     
     submitHandler = event => {
         event.preventDefault();
-        const email = this.emailRef.current.value;
+        const name = this.nameRef.current.value;
         const password = this.passwordRef.current.value;
-
-        if (email.trim().length === 0 || password.trim().length === 0){
+        
+        if (name.trim().length <= 3 || password.trim().length <= 3){
             return
         }
 
         let requestBody = {
             query: `
-                query Login ($email: String!, $password: String!){
-                    login(email: $email, password: $password) {
+                query Login ($name: String!, $password: String!){
+                    login(name: $name, password: $password) {
                         userId
                         token
                         tokenExpiration
                     }
-                }
-            `,
+                }`,
             variables: {
-                email: email,
+                name: name,
                 password: password
             }
         };
 
+        
         if (!this.state.isLogin) {
+
+            const profilePic = this.profilePicRef.current.value;
             requestBody = {
                 query: `
-                mutation Signup ($email: String!, $password: String!){
-                    createUser(userInput: {email: $email, password: $password}) {
+                mutation Signup ($name: String!, $password: String!, $profpic: String!){
+                    createUser(userInput: {name: $name, password: $password, profilePic: $profpic}) {
                         _id
-                        email
+                        name
                       }
                 }`,
                 variables: {
-                    email: email,
-                    password: password
+                    name: name,
+                    password: password,
+                    profpic: profilePic
                 }
             };
         }
@@ -91,13 +95,17 @@ class AuthPage extends Component {
         <form onSubmit={this.submitHandler}>
             <h1>{ this.state.isLogin ? "Login" : "Signup"}</h1>
             <div className="form-control" >
-                <label htmlFor="email">E-Mail</label>
-                <input type="email" id="email" ref={this.emailRef}/>
+                <label htmlFor="name">Username</label>
+                <input type="name" id="name" ref={this.nameRef}/>
             </div>
             <div className="form-control">
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" ref={this.passwordRef}/>
-            </div>   
+            </div>
+            { !this.state.isLogin && <div className="form-control">
+                <label htmlFor="profile_pic">Profile Picturen</label>
+                <input type="profile_pic" id="profile_pic" ref={this.profilePicRef}/>
+            </div> }    
             <div className="form-actions">
                 <button type="submit">Submit</button>
                 <button type="button" onClick={this.switchModeHandler}>Switch to { this.state.isLogin ? "Signup" : "Login"}</button>
