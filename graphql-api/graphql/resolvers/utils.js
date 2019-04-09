@@ -13,21 +13,21 @@ const eventLoader = new DataLoader((eventIds) => {
     return events(eventIds);
 });
 const userLoader = new DataLoader (userIds => {
-    console.log(userIds)
     return users(userIds);
 });
-//Outsourced output transformation for event and booking
+
+//output transformations
 const transformEvent = event => {
     return {
-        ...event._doc,
-        _id: event.id,
+        ...event._doc, //._doc is a mongoose feature that returns the MongoDB data without unnessecary metadata
+        _id: event.id, //.id is another mongoose feature that reaturns the id as string and not as object id.
         date: dateToString(event._doc.date),
         creator: singleUser.bind(this, event.creator.toString()),
         attendees: ()=> userLoader.loadMany(event._doc.attendees.map(x => x.toString()))
     };
 }
-//_doc is a mongoose feature that returns the MongoDB data without unnessecary metadata
-//event.id is another mongoose feature that reaturns the id as string and not as object id. But it seems that it now works automaticly?!
+    
+    
 const transformBooking = booking => {
     return {
         ...booking._doc,
@@ -50,6 +50,11 @@ const transformUser = user => {
 const events = async eventIds => {
     try {
     const events = await Event.find({_id: { $in: eventIds}});
+    events.sort((x,y) => {
+        return (
+            eventIds.indexOf(x._id.toString()) - eventIds.indexOf(y._id.toString())
+            );
+    })
     return events.map(event => {
             return transformEvent(event);
     });
@@ -59,20 +64,14 @@ const events = async eventIds => {
     }
 };
 
-const singleEvent = async eventId => {
-    try {
-    const event = await eventLoader.load(eventId.toString());
-        return event;
-    }
-    catch(err) {
-        throw err;
-    }
-};
-
 const users = async userIds => {
     try {
         const userList = await User.find({_id: { $in: userIds}})
-        console.log(userList);  
+        userList.sort((x,y) => {
+            return (
+                userIds.indexOf(x._id.toString()) - userIds.indexOf(y._id.toString())
+                );
+        })
         return userList.map(user => {
             return transformUser(user);
         });
@@ -82,15 +81,26 @@ const users = async userIds => {
     }
 };
 
+//using eventloader vor single ids
+const singleEvent = async eventId => {
+    try {
+    const event = await eventLoader.load(eventId);
+        return event;
+    }
+    catch(err) {
+        throw err;
+    }
+};
 const singleUser = async userId => {
     try {
         
-    const user = await userLoader.load(userId.toString());
+    const user = await userLoader.load(userId);
         return user;
     }
     catch(err) {
         throw err;
     }
 };
+
 exports.transformEvent = transformEvent;
 exports.transformBooking = transformBooking;
