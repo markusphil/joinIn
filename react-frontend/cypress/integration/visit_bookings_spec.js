@@ -18,8 +18,7 @@ describe("visit booking page", function() {
     }
   };
 
-  it("get permission", function() {
-    cy.visit("/");
+  it("get permission to bookings page", function() {
     cy.request({
       method: "POST",
       url: "http://localhost:8000/graphql",
@@ -27,6 +26,10 @@ describe("visit booking page", function() {
       headers: {
         "Content-Type": "application/json"
       }
+    }).then(resData => {
+      window.localStorage.setItem("token", resData.body.data.login.token);
+      window.localStorage.setItem("userId", resData.body.data.login.userId);
     });
+    cy.visit("/bookings");
   });
 });
