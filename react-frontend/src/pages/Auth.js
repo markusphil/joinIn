@@ -36,6 +36,8 @@ class AuthPage extends Component {
                         userId
                         token
                         tokenExpiration
+                        userName
+                        profilePic
                     }
                 }`,
       variables: {
@@ -77,11 +79,14 @@ class AuthPage extends Component {
         return res.json();
       })
       .then(resData => {
+        console.log(resData);
         if (resData.data.login.token) {
           //if token is valid, call the context login Method with the received auth-data
           this.context.login(
             resData.data.login.token,
             resData.data.login.userId,
+            resData.data.login.userName,
+            resData.data.login.profilePic,
             resData.data.login.tokenExpiration
           );
         }

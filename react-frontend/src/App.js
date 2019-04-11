@@ -26,16 +26,20 @@ class App extends Component {
       });
   }
 
-  login = (token, userId, tokenExpiration) => {
+  login = (token, userId, userName, profilePic, tokenExpiration) => {
     this.setState({ token: token, userId: userId });
     localStorage.setItem("token", token);
     localStorage.setItem("userId", userId);
+    localStorage.setItem("userName", userName);
+    localStorage.setItem("profilePic", profilePic);
   };
 
   logout = () => {
     this.setState({ token: null, userId: null });
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("profilePic");
   };
 
   render() {

@@ -1,35 +1,15 @@
 describe("visit booking page", function() {
   //graphQL login request
-  const username = "Murks";
-  const password = "1234";
 
-  let requestBody = {
-    query: `
-            query Login ($name: String!, $password: String!){
-                login(name: $name, password: $password) {
-                    userId
-                    token
-                    tokenExpiration
-                }
-            }`,
-    variables: {
-      name: username,
-      password: password
-    }
-  };
-
-  it("get permission to bookings page", function() {
-    cy.request({
-      method: "POST",
-      url: "http://localhost:8000/graphql",
-      body: JSON.stringify(requestBody),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(resData => {
-      window.localStorage.setItem("token", resData.body.data.login.token);
-      window.localStorage.setItem("userId", resData.body.data.login.userId);
-    });
+  it.only("get permission to bookings page", function() {
+    cy.login("Murks", "1234", true);
     cy.visit("/bookings");
+    cy.url().should("include", "/bookings");
+  });
+
+  it("get redirected with invalid password", function() {
+    cy.login("Murks", "123", false);
+    cy.visit("/bookings");
+    cy.url().should("include", "/auth");
   });
 });
