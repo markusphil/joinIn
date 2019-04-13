@@ -1,0 +1,23 @@
+@import './utils/mixins';
+
+.form-input {
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 1.2em;
+    width:90%;
+}
+
+.form-actions {
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 1.2em;
+    width:90%;
+    justify-content: center
+}
+
+input {
+    padding: 0.5em;
+    background-color: $primary-light;
+    @include fontdef;
+    @include borderbase;
+}

@@ -1,0 +1,15 @@
+//colors
+
+$primary: hsl(300, 100%, 30%);
+$primary-dark: mix(black, $primary, 60%);
+$primary-light: mix(white, $primary, 90%);
+$secondary: white;
+$text: hsl(200, 2%, 10%);
+$danger: hsl(350,90%, 50%);
+$danger-dark: mix(black, $danger, 60%);
+$inactive: gray;
+$inactive-dark: mix(black, $inactive, 60%);
+
+
+
+

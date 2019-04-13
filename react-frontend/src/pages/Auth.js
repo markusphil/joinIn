@@ -97,19 +97,19 @@ class AuthPage extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.submitHandler}>
+      <form className="login-form" onSubmit={this.submitHandler}>
         <h1>{this.state.isLogin ? "Login" : "Signup"}</h1>
-        <div className="form-control">
+        <div className="form-input">
           <label htmlFor="name">Username</label>
           <input type="name" id="name" ref={this.nameRef} />
         </div>
-        <div className="form-control">
+        <div className="form-input">
           <label htmlFor="password">Password</label>
           <input type="password" id="password" ref={this.passwordRef} />
         </div>
         {!this.state.isLogin && (
-          <div className="form-control">
-            <label htmlFor="profile_pic">Profile Picturen</label>
+          <div className="form-input">
+            <label htmlFor="profile_pic">Profile Picture</label>
             <input
               type="profile_pic"
               id="profile_pic"

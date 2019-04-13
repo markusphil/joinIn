@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: $text;
+    @include fontdef;
+  }
+
+// content wrapper
+.main-content {
+    position: relative;
+    top: 100px; //make dependet on navbar!
+    margin: auto;
+}
+

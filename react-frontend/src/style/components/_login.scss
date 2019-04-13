@@ -1,0 +1,11 @@
+@import './utils/mixins';
+
+.login-form {
+    margin: auto;
+    max-width: 400px;
+    @include borderbase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

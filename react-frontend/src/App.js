@@ -10,7 +10,6 @@ import { MainNavigation } from "./components/Navigation/Main";
 //Import Context
 import AuthContext from "./context/auth-context";
 
-import "./App.css";
 
 class App extends Component {
   state = {
