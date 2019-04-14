@@ -1,14 +1,15 @@
 body {
-    margin: 0;
-    padding: 0;
-    color: $text;
-    @include fontdef;
-  }
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: $text;
+  @include fontdef;
+  background: linear-gradient(140deg, $primary 0%, $primary-dark 100%);
+}
 
 // content wrapper
 .main-content {
-    position: relative;
-    top: 100px; //make dependet on navbar!
-    margin: auto;
+  position: relative;
+  top: 100px; //make dependet on navbar!
+  margin: auto;
 }
-

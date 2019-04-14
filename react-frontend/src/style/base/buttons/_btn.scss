@@ -1,0 +1,29 @@
+.btn {
+  @include borderbase;
+  color: white;
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  //versions:
+  //primary button
+  &.primary {
+    background-color: $primary;
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+  //inactive button
+  &.inactive {
+    background-color: $inactive;
+    &:hover {
+      background-color: $inactive-dark;
+    }
+  }
+  //dangerous button
+  &.danger {
+    background-color: $danger;
+    &:hover {
+      background-color: $danger-dark;
+    }
+  }
+}

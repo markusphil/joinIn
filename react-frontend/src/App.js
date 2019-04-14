@@ -10,18 +10,21 @@ import { MainNavigation } from "./components/Navigation/Main";
 //Import Context
 import AuthContext from "./context/auth-context";
 
-
 class App extends Component {
   state = {
     token: null,
-    userId: null
+    userId: null,
+    userName: null,
+    profilePic: null
   };
 
   componentWillMount() {
     localStorage.getItem("token") &&
       this.setState({
         token: localStorage.getItem("token"),
-        userId: localStorage.getItem("userId")
+        userId: localStorage.getItem("userId"),
+        userName: localStorage.getItem("userName"),
+        profilePic: localStorage.getItem("profilePic")
       });
   }
 
@@ -49,6 +52,8 @@ class App extends Component {
             value={{
               token: this.state.token,
               userId: this.state.userId,
+              userName: this.state.userName,
+              profilePic: this.state.profilePic,
               login: this.login,
               logout: this.logout
             }}

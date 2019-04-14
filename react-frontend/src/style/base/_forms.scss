@@ -1,23 +1,24 @@
-@import './utils/mixins';
+@import "./utils/mixins";
+@import "./utils/colors";
 
 .form-input {
-    display:flex;
-    flex-direction: column;
-    margin-bottom: 1.2em;
-    width:90%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2em;
+  width: 90%;
 }
 
 .form-actions {
-    display:flex;
-    flex-direction: row;
-    margin-bottom: 1.2em;
-    width:90%;
-    justify-content: center
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2em;
+  width: 90%;
+  justify-content: center;
 }
 
 input {
-    padding: 0.5em;
-    background-color: $primary-light;
-    @include fontdef;
-    @include borderbase;
+  padding: 0.5em;
+  background-color: rgba($text, 0.1); //$primary-light;
+  @include fontdef;
+  @include borderbase;
 }

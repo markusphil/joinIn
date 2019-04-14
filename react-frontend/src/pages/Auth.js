@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
+import { Button } from "../components/btn";
 
 class AuthPage extends Component {
   constructor(props) {
@@ -118,10 +119,13 @@ class AuthPage extends Component {
           </div>
         )}
         <div className="form-actions">
-          <button type="submit">Submit</button>
-          <button type="button" onClick={this.switchModeHandler}>
+          <Button status="primary" type="submit">
+            Submit
+          </Button>
+          <Button status="danger" type="button" action={this.switchModeHandler}>
+            {" "}
             Switch to {this.state.isLogin ? "Signup" : "Login"}
-          </button>
+          </Button>
         </div>
       </form>
     );
