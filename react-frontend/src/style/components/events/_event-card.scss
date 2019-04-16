@@ -1,0 +1,12 @@
+.event-card {
+  width: 600px;
+  padding: 5px;
+  margin-bottom: 5px;
+  @include borderbase;
+  background-color: $secondary;
+}
+.event-card-teaser {
+  height: 100px;
+  width: 250px;
+  background-size: cover;
+}

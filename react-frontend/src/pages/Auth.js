@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
-import { Button } from "../components/btn";
+import { Button } from "../components/ButtonMain";
 
 class AuthPage extends Component {
   constructor(props) {

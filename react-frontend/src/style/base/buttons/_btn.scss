@@ -1,8 +1,9 @@
 .btn {
   @include borderbase;
   color: white;
-  padding: 0.25rem 1rem;
+  padding: 0.2rem 1rem;
   margin-right: 1rem;
+  font-size: 16px;
   cursor: pointer;
   //versions:
   //primary button

@@ -1,0 +1,25 @@
+//old code, needs to be refactored!
+
+.tabs-control {
+  text-align: center;
+  padding: 0.5rem;
+  margin: auto;
+}
+
+.tabs-control button {
+  font: inherit;
+  border: none;
+  background: transparent;
+  color: black;
+  padding: 0.25rem 1.25rem;
+  border-bottom: solid 2px transparent;
+  cursor: pointer;
+}
+
+.tabs-control button.active {
+  border-bottom: solid 0.1rem orangered;
+  color: orangered;
+}
+.tabs-control button:focus {
+  outline: none;
+}
