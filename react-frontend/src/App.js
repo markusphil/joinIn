@@ -29,7 +29,12 @@ class App extends Component {
   }
 
   login = (token, userId, userName, profilePic, tokenExpiration) => {
-    this.setState({ token: token, userId: userId });
+    this.setState({
+      token: token,
+      userId: userId,
+      userName: userName,
+      profilePic: profilePic
+    });
     localStorage.setItem("token", token);
     localStorage.setItem("userId", userId);
     localStorage.setItem("userName", userName);
@@ -37,7 +42,12 @@ class App extends Component {
   };
 
   logout = () => {
-    this.setState({ token: null, userId: null });
+    this.setState({
+      token: null,
+      userId: null,
+      userName: null,
+      profilePic: null
+    });
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");

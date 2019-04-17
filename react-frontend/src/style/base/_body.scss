@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  height: 100%;
   color: $text;
   @include fontdef;
   background: linear-gradient(140deg, $primary-light 0%, $primary 100%);
