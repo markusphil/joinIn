@@ -7,6 +7,7 @@ import { Spinner } from "../components/Spinner/Spinner";
 import { graphRequest } from "../requests/Request";
 import { EventDetails } from "../components/Events/EventDetails";
 import { EventForm } from "../components/Events/EventForm";
+import { eventsRequestBody } from "../requests/eventsBody";
 
 class EventsPage extends Component {
   state = {
@@ -30,31 +31,8 @@ class EventsPage extends Component {
 
   fetchEvents() {
     this.setState({ isLoading: true });
-    const requestBody = {
-      query: `
-            query {
-                events {
-                    _id
-                    title
-                    description
-                    date
-                    location
-                    teaserImage
-                    creator {
-                        _id
-                        name
-                        profilePic
-                    }
-                    attendees {
-                        _id
-                        name
-                        profilePic
-                    }
-                }
-            }`
-    };
 
-    graphRequest(requestBody)
+    graphRequest(eventsRequestBody)
       .then(resData => {
         const events = resData.data.events;
         console.log(events);

@@ -3,6 +3,7 @@ export const graphRequest = (body, token) => {
     "Content-Type": "application/json"
   };
   console.log(headers);
+  console.log(JSON.stringify(body));
   if (token) {
     headers.Authorization = "Bearer " + token;
   }

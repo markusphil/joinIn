@@ -2,6 +2,7 @@ import React from "react";
 
 import Modal from "../Modal/Modal";
 import { graphRequest } from "../../requests/Request";
+import { bookEventRequestBody } from "../../requests/bookEventBody";
 
 export const EventDetails = props => {
   const { token, selectedEvent, closeModal } = props;
@@ -11,21 +12,8 @@ export const EventDetails = props => {
       closeModal();
       return;
     }
-    const requestBody = {
-      query: `
-                 mutation BookEvent ($id: ID!) {
-                    bookEvent (eventId: $id) {
-                        _id
-                        createdAt
-                        updatedAt
-                    }
-                }`,
-      variables: {
-        id: selectedEvent._id
-      }
-    };
 
-    graphRequest(requestBody, token)
+    graphRequest(bookEventRequestBody(selectedEvent._id), token)
       .then(resData => {
         console.log(resData);
         closeModal();

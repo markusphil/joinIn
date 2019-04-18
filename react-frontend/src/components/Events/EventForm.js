@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import Modal from "../Modal/Modal";
 import { graphRequest } from "../../requests/Request";
+import { createEventRequestBody } from "../../requests/createEventBody";
 
 export const EventForm = props => {
   //using Hooks for Refs
@@ -12,51 +13,26 @@ export const EventForm = props => {
   const teaserImageRef = useRef(null);
 
   const confirmModalHandler = () => {
-    const title = titleRef.current.value;
-    const location = locationRef.current.value;
-    const date = dateRef.current.value;
-    const description = descriptionRef.current.value;
-    const teaserImage = teaserImageRef.current.value;
+    const eventInput = {
+      title: titleRef.current.value,
+      location: locationRef.current.value,
+      date: dateRef.current.value,
+      description: descriptionRef.current.value,
+      teaserImage: teaserImageRef.current.value
+    };
 
     if (
-      title.trim().length === 0 ||
-      location.trim().length === 0 ||
-      date.trim().length === 0 ||
-      description.trim().length === 0
+      eventInput.title.trim().length === 0 ||
+      eventInput.location.trim().length === 0 ||
+      eventInput.date.trim().length === 0 ||
+      eventInput.description.trim().length === 0
     ) {
-      console.log("enter valid Data");
+      console.log("enter valid Data"); //show real error message here!
       return;
     }
     props.closeModal();
-    const requestBody = {
-      query: `
-                    mutation CreateEvent ($title: String!, $desc:String!, $location: String!, $date: String!, $teaserimage: String!){
-                        createEvent(eventInput:{
-                            title: $title,
-                            location: $location,
-                            description: $desc,
-                            date: $date,
-                            teaserImage: $teaserimage
-                        
-                        }) {
-                            _id
-                            title
-                            description
-                            date
-                            location
-                            teaserImage
-                        }
-                    }`,
-      variables: {
-        title: title,
-        desc: description,
-        location: location,
-        date: date,
-        teaserimage: teaserImage
-      }
-    };
 
-    graphRequest(requestBody, props.token)
+    graphRequest(createEventRequestBody(eventInput), props.token)
       .then(resData => {
         props.addEvent(resData);
       })
