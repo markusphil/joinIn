@@ -22,7 +22,6 @@ export const EventDetails = props => {
         console.log(err);
       });
   };
-  console.log(selectedEvent);
   return (
     <React.Fragment>
       <Modal

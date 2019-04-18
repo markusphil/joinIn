@@ -1,11 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   color: $text;
   @include fontdef;
-  background: linear-gradient(140deg, $primary-light 0%, $primary 100%);
+  background: linear-gradient(140deg, $contrast 0%, $primary-dark 100%);
 }
 
 // content wrapper
@@ -13,6 +12,6 @@ body {
   position: relative;
   top: 100px; //make dependet on navbar!
   margin: auto;
-  max-width: 1200px;
+  max-width: 1700px;
   padding: 12px;
 }

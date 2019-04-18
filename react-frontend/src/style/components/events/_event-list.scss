@@ -1,9 +1,11 @@
 //change to column based style... 1/2/3 depending on viewport
 .event-list {
-  width: 40rem;
-  max-width: 90%;
+  min-width: 400px;
+  width: 100%;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   list-style: none;
+  justify-content: center;
 }

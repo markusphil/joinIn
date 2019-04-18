@@ -20,5 +20,6 @@ input {
   padding: 0.5em;
   background-color: rgba($text, 0.1); //$primary-light;
   @include fontdef;
-  @include borderbase;
+  @include border-base;
+  @include border-color;
 }

@@ -1,12 +1,32 @@
 .event-card {
-  width: 600px;
-  padding: 5px;
-  margin-bottom: 5px;
-  @include borderbase;
-  background-color: $secondary;
-}
-.event-card-teaser {
-  height: 100px;
-  width: 250px;
+  width: 400px;
+  height: 180px;
+  margin: 10px;
   background-size: cover;
+  @include border-base;
+  @include shadow-1;
+  &:hover {
+    @include shadow-2;
+    @include border-color;
+    margin: 9px;
+  }
+}
+.event-card-body {
+  //text-align: right;
+  padding: 5px 20px 5px 40px;
+  width: 40%;
+  height: calc(100% - 10px);
+  background-color: rgba($secondary, 0.9);
+  float: right;
+  @include border-right;
+  @include shadow-1;
+
+  h2 {
+    color: $primary;
+    margin: 0;
+  }
+  p {
+    margin: 2px;
+  }
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
 }

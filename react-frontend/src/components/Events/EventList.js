@@ -11,7 +11,7 @@ export const EventList = props => {
         title={event.title}
         location={event.location}
         date={event.date}
-        img="https://ichef.bbci.co.uk/news/660/cpsprodpb/B7B0/production/_101542074_gettyimages-956391468.jpg"
+        img={event.teaserImage}
         creatorId={event.creator._id}
         userId={props.authUserId}
         onDetail={props.onViewDetail}
