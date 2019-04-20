@@ -1,5 +1,8 @@
-export const BookingsRequestBody = {
-  query: `
+import { graphRequest } from "./Request";
+
+export const bookingsRequest = token => {
+  let requestBody = {
+    query: `
            query {
               bookings {
                   _id
@@ -13,4 +16,6 @@ export const BookingsRequestBody = {
                   }
               }
           }`
+  };
+  return graphRequest(requestBody, token);
 };

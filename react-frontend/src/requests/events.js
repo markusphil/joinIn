@@ -1,5 +1,8 @@
-export const eventsRequestBody = {
-  query: `
+import { graphRequest } from "./Request";
+
+export const eventsRequest = () => {
+  let requestBody = {
+    query: `
           query {
               events {
                   _id
@@ -20,4 +23,6 @@ export const eventsRequestBody = {
                 }
               }
           }`
+  };
+  return graphRequest(requestBody);
 };

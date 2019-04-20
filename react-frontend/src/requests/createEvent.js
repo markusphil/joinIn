@@ -1,5 +1,7 @@
-export const createEventRequestBody = input => {
-  return {
+import { graphRequest } from "./Request";
+
+export const createEventRequest = (input, token) => {
+  let requestBody = {
     query: `
                     mutation CreateEvent ($title: String!, $desc:String!, $location: String!, $date: String!, $teaserimage: String!){
                         createEvent(eventInput:{
@@ -26,4 +28,6 @@ export const createEventRequestBody = input => {
       teaserimage: input.teaserImage
     }
   };
+
+  return graphRequest(requestBody, token);
 };

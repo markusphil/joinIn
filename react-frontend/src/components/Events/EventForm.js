@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
 
 import Modal from "../Modal/Modal";
-import { graphRequest } from "../../requests/Request";
-import { createEventRequestBody } from "../../requests/createEventBody";
+import { createEventRequest } from "../../requests/createEvent";
 
 export const EventForm = props => {
   //using Hooks for Refs
@@ -32,7 +31,7 @@ export const EventForm = props => {
     }
     props.closeModal();
 
-    graphRequest(createEventRequestBody(eventInput), props.token)
+    createEventRequest(eventInput, props.token)
       .then(resData => {
         props.addEvent(resData);
       })

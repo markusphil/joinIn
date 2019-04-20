@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthContext from "../context/auth-context";
 import { Button } from "../components/ButtonMain";
+import { authRequest } from "../requests/auth";
 
 class AuthPage extends Component {
   constructor(props) {
@@ -23,62 +24,22 @@ class AuthPage extends Component {
 
   submitHandler = event => {
     event.preventDefault();
-    const name = this.nameRef.current.value;
-    const password = this.passwordRef.current.value;
-
-    if (name.trim().length <= 3 || password.trim().length <= 3) {
-      return;
-    }
-
-    let requestBody = {
-      query: `
-                query Login ($name: String!, $password: String!){
-                    login(name: $name, password: $password) {
-                        userId
-                        token
-                        tokenExpiration
-                        userName
-                        profilePic
-                    }
-                }`,
-      variables: {
-        name: name,
-        password: password
-      }
+    const formData = {
+      name: this.nameRef.current.value,
+      password: this.passwordRef.current.value
     };
 
+    if (
+      formData.name.trim().length <= 3 ||
+      formData.password.trim().length <= 3
+    ) {
+      return;
+    }
     if (!this.state.isLogin) {
-      const profilePic = this.profilePicRef.current.value;
-      requestBody = {
-        query: `
-                mutation Signup ($name: String!, $password: String!, $profpic: String!){
-                    createUser(userInput: {name: $name, password: $password, profilePic: $profpic}) {
-                        _id
-                        name
-                      }
-                }`,
-        variables: {
-          name: name,
-          password: password,
-          profpic: profilePic
-        }
-      };
+      formData.profilePic = this.profilePicRef.current.value;
     }
 
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      body: JSON.stringify(requestBody),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        if (res.status !== 200 && res.status !== 201) {
-          //throw error when status is not ok
-          throw new Error("connection failed!");
-        }
-        return res.json();
-      })
+    authRequest(formData, this.state.isLogin)
       .then(resData => {
         console.log(resData);
         if (resData.data.login.token) {

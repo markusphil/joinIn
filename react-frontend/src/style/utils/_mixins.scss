@@ -17,6 +17,12 @@
 @mixin border-color {
   border: 1px solid $primary;
 }
+@mixin border-wide {
+  border: 2px solid $secondary;
+}
+@mixin border-wide-color {
+  border: 2px solid $primary;
+}
 
 @mixin shadow-1 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

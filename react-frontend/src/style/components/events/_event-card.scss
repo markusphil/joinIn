@@ -5,10 +5,19 @@
   background-size: cover;
   @include border-base;
   @include shadow-1;
+  cursor: pointer;
   &:hover {
     @include shadow-2;
     @include border-color;
     margin: 9px;
+  }
+
+  &.attendee {
+    @include border-wide;
+    margin: 8px;
+    &:hover {
+      @include border-wide-color;
+    }
   }
 }
 .event-card-body {
@@ -29,4 +38,13 @@
     margin: 2px;
   }
   clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+
+  &.creator {
+    background-color: rgba($primary, 0.9);
+    color: $secondary;
+
+    h2 {
+      color: $secondary;
+    }
+  }
 }

@@ -1,5 +1,7 @@
-export const cancelBookingRequestBody = id => {
-  return {
+import { graphRequest } from "./Request";
+
+export const cancelBookingRequest = (id, token) => {
+  let requestBody = {
     query: `
             mutation CancelBooking($id: ID!) {
                 cancelBooking (bookingId: $id) {
@@ -9,4 +11,5 @@ export const cancelBookingRequestBody = id => {
             }`,
     variables: { id: id }
   };
+  return graphRequest(requestBody, token);
 };

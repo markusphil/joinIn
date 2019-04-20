@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import { Backdrop } from "../components/Modal/Backdrop";
-import { EventList } from "../components/Events/EventList";
 import AuthContext from "../context/auth-context";
-import { Spinner } from "../components/Spinner/Spinner";
-import { graphRequest } from "../requests/Request";
+
+import { eventsRequest } from "../requests/events";
+
+import { EventList } from "../components/Events/EventList";
 import { EventDetails } from "../components/Events/EventDetails";
 import { EventForm } from "../components/Events/EventForm";
-import { eventsRequestBody } from "../requests/eventsBody";
+import { Spinner } from "../components/Spinner/Spinner";
 
 class EventsPage extends Component {
   state = {
@@ -32,7 +32,7 @@ class EventsPage extends Component {
   fetchEvents() {
     this.setState({ isLoading: true });
 
-    graphRequest(eventsRequestBody)
+    eventsRequest()
       .then(resData => {
         const events = resData.data.events;
         console.log(events);
@@ -73,7 +73,8 @@ class EventsPage extends Component {
         location: resData.data.createEvent.location,
         creator: {
           _id: this.context.userId
-        }
+        },
+        attendees: []
       });
       return { fetchedEvents: updatedEvents };
     });
@@ -82,7 +83,6 @@ class EventsPage extends Component {
   render() {
     return (
       <React.Fragment>
-        {(this.state.modalOpen || this.state.selectedEvent) && <Backdrop />}
         {this.state.modalOpen && (
           <EventForm
             token={this.context.token}

@@ -4,9 +4,8 @@ import { BookingList } from "../components/Bookings/BookingList";
 import { BookingChart } from "../components/Bookings/BookingChart";
 import { BookingTabs } from "../components/Bookings/BookingTabs";
 import AuthContext from "../context/auth-context";
-import { graphRequest } from "../requests/Request";
-import { BookingsRequestBody } from "../requests/bookingsBody";
-import { cancelBookingRequestBody } from "../requests/cancelBookingBody";
+import { bookingsRequest } from "../requests/bookings";
+import { cancelBookingRequest } from "../requests/cancelBooking";
 
 class BookingsPage extends Component {
   state = {
@@ -23,7 +22,7 @@ class BookingsPage extends Component {
   fetchBookings = () => {
     this.setState({ isLoading: true });
 
-    graphRequest(BookingsRequestBody, this.context.token)
+    bookingsRequest(this.context.token)
       .then(resData => {
         const fetchedBookings = resData.data.bookings;
         this.setState({ bookings: fetchedBookings, isLoading: false });
@@ -34,7 +33,7 @@ class BookingsPage extends Component {
       });
   };
   deleteBookingHandler = bookingId => {
-    graphRequest(cancelBookingRequestBody(bookingId), this.context.token)
+    cancelBookingRequest(bookingId, this.context.token)
       .then(resData => {
         this.setState(prevState => {
           const updatedBookings = prevState.bookings.filter(booking => {

@@ -2,6 +2,8 @@ import React from "react";
 
 import { EventItem } from "./EventItem";
 
+//move check for creator / attendee in here?
+
 export const EventList = props => {
   const events = props.events.map(event => {
     return (
@@ -15,6 +17,7 @@ export const EventList = props => {
         creatorId={event.creator._id}
         userId={props.authUserId}
         onDetail={props.onViewDetail}
+        attendees={event.attendees}
       />
     );
   });

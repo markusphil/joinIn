@@ -1,0 +1,16 @@
+//z-Layers
+$z-layers: (
+  "priority-modal": 6000,
+  "modal": 5000,
+  "backdrop": 4000,
+  "nav": 3000,
+  "warning": 1000,
+  "default": 1,
+  "below": -1
+);
+
+@function z($layer) {
+  @return map-get($z-layers, $layer);
+}
+
+//Breakpoints...

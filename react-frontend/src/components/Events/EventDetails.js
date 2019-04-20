@@ -1,8 +1,7 @@
 import React from "react";
 
 import Modal from "../Modal/Modal";
-import { graphRequest } from "../../requests/Request";
-import { bookEventRequestBody } from "../../requests/bookEventBody";
+import { bookEventRequest } from "../../requests/bookEvent";
 
 export const EventDetails = props => {
   const { token, selectedEvent, closeModal } = props;
@@ -13,7 +12,7 @@ export const EventDetails = props => {
       return;
     }
 
-    graphRequest(bookEventRequestBody(selectedEvent._id), token)
+    bookEventRequest(selectedEvent._id, token)
       .then(resData => {
         console.log(resData);
         closeModal();
