@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { Spinner } from "../components/Spinner/Spinner";
-import { BookingList } from "../components/Bookings/BookingList";
-import { BookingChart } from "../components/Bookings/BookingChart";
-import { BookingTabs } from "../components/Bookings/BookingTabs";
-import AuthContext from "../context/auth-context";
+
+import GlobalContext from "../context/main-context";
+
 import { bookingsRequest } from "../requests/bookings";
 import { cancelBookingRequest } from "../requests/cancelBooking";
 
-class BookingsPage extends Component {
+import { Spinner } from "../components/Spinner/Spinner";
+import { BookingList } from "../components/MyEvents/BookingList";
+import { BookingChart } from "../components/MyEvents/BookingChart";
+import { BookingTabs } from "../components/MyEvents/BookingTabs";
+
+class MyEventsPage extends Component {
   state = {
-    isLoading: false,
     bookings: [],
     activeTab: "list"
   };
-  static contextType = AuthContext;
+  static contextType = GlobalContext;
 
   componentDidMount() {
     this.fetchBookings();
@@ -85,4 +87,4 @@ class BookingsPage extends Component {
   }
 }
 
-export default BookingsPage;
+export default MyEventsPage;

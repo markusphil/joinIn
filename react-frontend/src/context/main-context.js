@@ -6,5 +6,11 @@ export default React.createContext({
   userName: null,
   profilePic: null,
   login: (token, userId, userName, profilePic, tokenExpiration) => {},
-  logout: () => {}
+  logout: () => {},
+  isLoading: false,
+  selectedEvent: null,
+  startLoading: () => {},
+  finishLoading: () => {},
+  setSelected: event => {},
+  clearSelected: () => {}
 });

@@ -4,11 +4,12 @@ import Modal from "../Modal/Modal";
 import { bookEventRequest } from "../../requests/bookEvent";
 
 export const EventDetails = props => {
-  const { token, selectedEvent, closeModal } = props;
+  const { token, selectedEvent, closeModal, history } = props;
 
   const bookEventHandler = () => {
     if (!token) {
       closeModal();
+      history.push("/auth");
       return;
     }
 
@@ -29,7 +30,7 @@ export const EventDetails = props => {
         canConfirm
         onCancel={closeModal}
         onConfirm={bookEventHandler}
-        confirmText={token ? "Book Event" : "go to Login"}
+        confirmText={token ? "Join" : "to Login"}
       >
         <div>
           <p>location: {selectedEvent.location}</p>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AuthContext from "../context/auth-context";
+import GlobalContext from "../context/main-context";
 
 import { eventsRequest } from "../requests/events";
 
@@ -9,17 +9,15 @@ import { EventDetails } from "../components/Events/EventDetails";
 import { EventForm } from "../components/Events/EventForm";
 import { Spinner } from "../components/Spinner/Spinner";
 
-class EventsPage extends Component {
+class ExplorePage extends Component {
   state = {
-    modalOpen: false,
-    fetchedEvents: [],
-    isLoading: false,
-    selectedEvent: null
+    addEvent: false,
+    fetchedEvents: []
   };
   //Property to check if component is active (cleanup)
   isActive = true;
 
-  static contextType = AuthContext;
+  static contextType = GlobalContext;
 
   //LifecycleMethods
   componentDidMount() {
@@ -49,19 +47,13 @@ class EventsPage extends Component {
   }
 
   openModalHandler = () => {
-    this.setState({ modalOpen: true });
+    this.setState({ addEvent: true });
   };
   closeModalHandler = () => {
-    this.setState({ modalOpen: false, selectedEvent: null });
+    this.setState({ addEvent: false });
+    this.context.clearSelected();
   };
-  showDetailHandler = eventId => {
-    this.setState(prevState => {
-      const selectedEvent = prevState.fetchedEvents.find(
-        e => e._id === eventId
-      );
-      return { selectedEvent: selectedEvent };
-    });
-  };
+
   addEventHandler = resData => {
     this.setState(prevState => {
       const updatedEvents = [...prevState.fetchedEvents];
@@ -80,6 +72,11 @@ class EventsPage extends Component {
     });
   };
 
+  showDetailHandler = eventId => {
+    const event = this.state.fetchedEvents.find(e => e._id === eventId);
+    this.context.setSelected(event);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -90,11 +87,12 @@ class EventsPage extends Component {
             closeModal={this.closeModalHandler}
           />
         )}
-        {this.state.selectedEvent && (
+        {this.context.selectedEvent && (
           <EventDetails
             token={this.context.token}
-            selectedEvent={this.state.selectedEvent}
+            selectedEvent={this.context.selectedEvent}
             closeModal={this.closeModalHandler}
+            history={this.props.history}
           />
         )}
         <div>
@@ -105,7 +103,7 @@ class EventsPage extends Component {
             </button>
           )}
         </div>
-        {this.state.isLoading ? (
+        {this.context.isLoading ? (
           <Spinner />
         ) : (
           <EventList
@@ -119,4 +117,4 @@ class EventsPage extends Component {
   }
 }
 
-export default EventsPage;
+export default ExplorePage;

@@ -1,10 +1,9 @@
 import React from "react";
 import { Button } from "../ButtonMain";
-import { Backdrop } from "./Backdrop";
 
 const modal = props => (
   <React.Fragment>
-    <Backdrop />
+    <div className="backdrop" />
     <div className="modal">
       <header>
         <h1>{props.title}</h1>
@@ -17,7 +16,7 @@ const modal = props => (
           </Button>
         )}
         {props.canConfirm && (
-          <Button status="primary" action={props.onConfirm}>
+          <Button status={props.buttonStatus} action={props.onConfirm}>
             {props.confirmText}
           </Button>
         )}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthContext from "../context/auth-context";
+import GlobalContext from "../context/main-context";
 import { Button } from "../components/ButtonMain";
 import { authRequest } from "../requests/auth";
 
@@ -14,7 +14,7 @@ class AuthPage extends Component {
     isLogin: true
   };
 
-  static contextType = AuthContext;
+  static contextType = GlobalContext;
 
   switchModeHandler = () => {
     this.setState(state => {

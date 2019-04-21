@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import AuthContext from "../../context/auth-context";
+import GlobalContext from "../../context/main-context";
 import { Avatar } from "../Avatar";
 
 export const MainNavigation = props => (
-  <AuthContext.Consumer>
+  <GlobalContext.Consumer>
     {context => {
       //Context Consumer needs function as child, wich reuturns the component
 
@@ -17,12 +17,12 @@ export const MainNavigation = props => (
           <nav className="main-nav-items">
             <ul>
               <li>
-                <NavLink to="/events">Events</NavLink>
+                <NavLink to="/explore">Explore</NavLink>
               </li>
               {context.token && (
                 <React.Fragment>
                   <li>
-                    <NavLink to="/bookings">Bookings</NavLink>
+                    <NavLink to="/myevents">MyEvents</NavLink>
                   </li>
                   <li onClick={context.logout}>
                     <button>Logout</button>
@@ -45,5 +45,5 @@ export const MainNavigation = props => (
         </header>
       );
     }}
-  </AuthContext.Consumer>
+  </GlobalContext.Consumer>
 );
