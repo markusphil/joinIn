@@ -5,9 +5,7 @@ import GlobalContext from "../context/main-context";
 import { eventsRequest } from "../requests/events";
 
 import { EventList } from "../components/Events/EventList";
-import { EventDetails } from "../components/Events/EventDetails";
 import { EventForm } from "../components/Events/EventForm";
-import { Spinner } from "../components/Spinner/Spinner";
 
 class ExplorePage extends Component {
   state = {
@@ -72,27 +70,14 @@ class ExplorePage extends Component {
     });
   };
 
-  showDetailHandler = eventId => {
-    const event = this.state.fetchedEvents.find(e => e._id === eventId);
-    this.context.setSelected(event);
-  };
-
   render() {
     return (
       <React.Fragment>
-        {this.state.modalOpen && (
+        {this.state.addEvent && (
           <EventForm
             token={this.context.token}
             addEvent={this.addEventHandler}
             closeModal={this.closeModalHandler}
-          />
-        )}
-        {this.context.selectedEvent && (
-          <EventDetails
-            token={this.context.token}
-            selectedEvent={this.context.selectedEvent}
-            closeModal={this.closeModalHandler}
-            history={this.props.history}
           />
         )}
         <div>
@@ -103,15 +88,11 @@ class ExplorePage extends Component {
             </button>
           )}
         </div>
-        {this.context.isLoading ? (
-          <Spinner />
-        ) : (
-          <EventList
-            events={this.state.fetchedEvents}
-            authUserId={this.context.userId}
-            onViewDetail={this.showDetailHandler}
-          />
-        )}
+        <EventList
+          events={this.state.fetchedEvents}
+          closeModal={this.closeModalHandler}
+          history={this.props.history}
+        />
       </React.Fragment>
     );
   }

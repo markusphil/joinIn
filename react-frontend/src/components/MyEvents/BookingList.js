@@ -1,3 +1,5 @@
+//will be removed
+
 import React from "react";
 
 export const BookingList = props => (

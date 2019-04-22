@@ -1,7 +1,7 @@
 import { graphRequest } from "./Request";
 
 export const authRequest = (formData, isLogin) => {
-  let requestBody = {
+  let loginBody = {
     query: `
               query Login ($name: String!, $password: String!){
                   login(name: $name, password: $password) {
@@ -17,23 +17,31 @@ export const authRequest = (formData, isLogin) => {
       password: formData.password
     }
   };
+  let signupBody = {
+    query: `
+            mutation Signup ($name: String!, $password: String!, $profpic: String!){
+                createUser(userInput: {name: $name, password: $password, profilePic: $profpic}) {
+                  _id
+                  name
+                  }
+            }`,
+    variables: {
+      name: formData.name,
+      password: formData.password,
+      profpic: formData.profilePic
+    }
+  };
 
   if (!isLogin) {
-    requestBody = {
-      query: `
-              mutation Signup ($name: String!, $password: String!, $profpic: String!){
-                  createUser(userInput: {name: $name, password: $password, profilePic: $profpic}) {
-                      _id
-                      name
-                    }
-              }`,
-      variables: {
-        name: formData.name,
-        password: formData.password,
-        profpic: formData.profilePic
+    return graphRequest(signupBody).then(resData => {
+      if (resData.data.createUser) {
+        return graphRequest(loginBody);
+      } else {
+        //how can I catch the error from the API here?
+        throw new Error("signup failed!");
       }
-    };
+    });
+  } else {
+    return graphRequest(loginBody);
   }
-
-  return graphRequest(requestBody);
 };

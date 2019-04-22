@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import GlobalContext from "../../context/main-context";
 
 import { EventItem } from "./EventItem";
-
-//move check for creator / attendee in here?
+import { EventDetails } from "./EventDetails";
+import { Spinner } from "../Spinner/Spinner";
 
 export const EventList = props => {
+  const context = useContext(GlobalContext);
+
+  const showDetailHandler = eventId => {
+    const event = props.events.find(e => e._id === eventId);
+    context.setSelected(event);
+  };
+
   const events = props.events.map(event => {
     return (
       <EventItem
@@ -15,11 +24,28 @@ export const EventList = props => {
         date={event.date}
         img={event.teaserImage}
         creatorId={event.creator._id}
-        userId={props.authUserId}
-        onDetail={props.onViewDetail}
+        userId={context.userId}
+        onDetail={showDetailHandler}
         attendees={event.attendees}
       />
     );
   });
-  return <ul className="event-list">{events}</ul>;
+
+  return (
+    <React.Fragment>
+      {context.selectedEvent && (
+        <EventDetails
+          token={context.token}
+          selectedEvent={context.selectedEvent}
+          closeModal={props.closeModal}
+          history={props.history}
+        />
+      )}
+      {context.isLoading ? (
+        <Spinner />
+      ) : (
+        <ul className="event-list">{events}</ul>
+      )}
+    </React.Fragment>
+  );
 };

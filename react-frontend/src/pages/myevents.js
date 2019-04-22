@@ -6,14 +6,15 @@ import { bookingsRequest } from "../requests/bookings";
 import { cancelBookingRequest } from "../requests/cancelBooking";
 
 import { Spinner } from "../components/Spinner/Spinner";
-import { BookingList } from "../components/MyEvents/BookingList";
+import { EventList } from "../components/Events/EventList";
 import { BookingChart } from "../components/MyEvents/BookingChart";
-import { BookingTabs } from "../components/MyEvents/BookingTabs";
+import { BookingList } from "../components/MyEvents/BookingList";
+import { TabsControl } from "../components/Navigation/TabsControl";
 
 class MyEventsPage extends Component {
   state = {
     bookings: [],
-    activeTab: "list"
+    isJoined: true
   };
   static contextType = GlobalContext;
 
@@ -50,38 +51,46 @@ class MyEventsPage extends Component {
       });
   };
 
-  changeTabHandler = activeTab => {
-    if (activeTab === "list") {
-      this.setState({ activeTab: "list" });
-    } else {
-      this.setState({ activeTab: "chart" });
-    }
+  changeTabHandler = () => {
+    this.setState(state => {
+      return { isJoined: !state.isJoined };
+    });
+  };
+
+  getEvents = bookings => {
+    const events = bookings.map(booking => booking.event);
+    return events;
   };
 
   render() {
-    let content = <Spinner />;
-    if (!this.state.isLoading) {
-      content = (
-        <React.Fragment>
-          <BookingTabs
-            activeTab={this.state.activeTab}
-            onChange={this.changeTabHandler}
-          />
-          {this.state.activeTab === "list" ? (
-            <BookingList
-              bookings={this.state.bookings}
-              onDelete={this.deleteBookingHandler}
-            />
-          ) : (
-            <BookingChart />
-          )}
-        </React.Fragment>
-      );
-    }
     return (
       <React.Fragment>
-        <h1>The Bookings Page</h1>
-        {content}
+        <TabsControl
+          activeTab={this.state.isJoined}
+          onChange={this.changeTabHandler}
+          tab1="Joined Events"
+          tab2="Created Events"
+        />
+        {this.state.isJoined === true ? (
+          this.context.isLoading ? (
+            <Spinner />
+          ) : (
+            <div>
+              <EventList
+                events={this.getEvents(this.state.bookings)}
+                closeModal={() => this.context.clearSelected()}
+                history={this.props.history}
+              />
+              <h3>Old List for Debugging:</h3>
+              <BookingList
+                bookings={this.state.bookings}
+                onDelete={this.deleteBookingHandler}
+              />
+            </div>
+          )
+        ) : (
+          <BookingChart />
+        )}
       </React.Fragment>
     );
   }

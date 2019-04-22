@@ -9,10 +9,22 @@ export const bookingsRequest = token => {
                   createdAt
                   updatedAt
                   event {
+                    _id
+                    title
+                    description
+                    date
+                    location
+                    teaserImage
+                    creator {
                       _id
-                      title
-                      date
-                      location
+                      name
+                      profilePic
+                    } 
+                    attendees {
+                        _id
+                        name
+                        profilePic
+                    }
                   }
               }
           }`

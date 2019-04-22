@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GlobalContext from "../context/main-context";
 import { Button } from "../components/ButtonMain";
 import { authRequest } from "../requests/auth";
+import { TabsControl } from "../components/Navigation/TabsControl";
 
 class AuthPage extends Component {
   constructor(props) {
@@ -41,7 +42,6 @@ class AuthPage extends Component {
 
     authRequest(formData, this.state.isLogin)
       .then(resData => {
-        console.log(resData);
         if (resData.data.login.token) {
           //if token is valid, call the context login Method with the received auth-data
           this.context.login(
@@ -60,7 +60,12 @@ class AuthPage extends Component {
   render() {
     return (
       <form className="login-form" onSubmit={this.submitHandler}>
-        <h1>{this.state.isLogin ? "Login" : "Signup"}</h1>
+        <TabsControl
+          activeTab={this.state.isLogin}
+          onChange={this.switchModeHandler}
+          tab1="Login"
+          tab2="Signup"
+        />
         <div className="form-input">
           <label htmlFor="name">Username</label>
           <input type="name" id="name" ref={this.nameRef} />
@@ -81,11 +86,7 @@ class AuthPage extends Component {
         )}
         <div className="form-actions">
           <Button status="primary" type="submit">
-            Submit
-          </Button>
-          <Button status="danger" type="button" action={this.switchModeHandler}>
-            {" "}
-            Switch to {this.state.isLogin ? "Signup" : "Login"}
+            {this.state.isLogin ? "Login" : "Signup"}
           </Button>
         </div>
       </form>

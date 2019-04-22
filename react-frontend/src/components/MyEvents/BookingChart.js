@@ -1,6 +1,6 @@
-import React from 'react';
+//Will be replaced
+import React from "react";
 
 export const BookingChart = () => {
-    
-    return<p>The Chart!</p>
-}
+  return <p>Here will be the list of Events you created</p>;
+};
