@@ -17,7 +17,8 @@ class AuthPage extends Component {
 
   static contextType = GlobalContext;
 
-  switchModeHandler = () => {
+  switchModeHandler = event => {
+    event.preventDefault();
     this.setState(state => {
       return { isLogin: !state.isLogin };
     });
@@ -54,7 +55,7 @@ class AuthPage extends Component {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
       });
   };
   render() {

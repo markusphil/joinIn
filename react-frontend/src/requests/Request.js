@@ -10,10 +10,11 @@ export const graphRequest = (body, token) => {
     body: JSON.stringify(body),
     headers: headers
   }).then(res => {
-    if (res.status !== 200 && res.status !== 201) {
-      //throw error when status is not ok
-      throw new Error("connection failed!");
-    }
-    return res.json();
+    return res.json().then(err => {
+      //check for error
+      err.errors.map(error => {
+        throw new Error(error.message);
+      });
+    });
   });
 };

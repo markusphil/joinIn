@@ -36,9 +36,6 @@ export const authRequest = (formData, isLogin) => {
     return graphRequest(signupBody).then(resData => {
       if (resData.data.createUser) {
         return graphRequest(loginBody);
-      } else {
-        //how can I catch the error from the API here?
-        throw new Error("signup failed!");
       }
     });
   } else {
