@@ -21,6 +21,8 @@ It includes the following technologies & libaries:
 - react-router
 - classnames
 - SASS
+
+---
 Starting from the tutorial I made/planed following changes:
 
 ## API
