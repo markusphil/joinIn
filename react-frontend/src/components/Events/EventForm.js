@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import Modal from "../Modal/Modal";
+import Modal from "../core/Modal";
 import { createEventRequest } from "../../requests/createEvent";
 
 export const EventForm = props => {

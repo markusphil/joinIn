@@ -5,11 +5,11 @@ import GlobalContext from "../context/main-context";
 import { bookingsRequest } from "../requests/bookings";
 import { cancelBookingRequest } from "../requests/cancelBooking";
 
-import { Spinner } from "../components/Spinner/Spinner";
-import { EventList } from "../components/Events/EventList";
-import { BookingChart } from "../components/MyEvents/BookingChart";
-import { BookingList } from "../components/MyEvents/BookingList";
-import { TabsControl } from "../components/Navigation/TabsControl";
+import { Spinner } from "../components/core/Spinner";
+import { EventList } from "../components/events/EventList";
+import { BookingChart } from "../components/legacy/BookingChart";
+import { BookingList } from "../components/legacy/BookingList";
+import { TabsControl } from "../components/navigation/TabsControl";
 
 class MyEventsPage extends Component {
   state = {

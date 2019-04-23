@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import GlobalContext from "../../context/main-context";
-import { Avatar } from "../Avatar";
+import { Avatar } from "../user/Avatar";
 
 export const MainNavigation = props => (
   <GlobalContext.Consumer>

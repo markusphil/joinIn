@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 //Import Navbar
-import { MainNavigation } from "./components/Navigation/Navbar";
+import { MainNavigation } from "./components/navigation/Navbar";
 //Import Statemanager + Context
 import GlobalState from "./context/GlobalState";
 import { Routes } from "./pages/routing";

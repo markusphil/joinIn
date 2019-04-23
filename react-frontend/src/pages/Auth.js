@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import GlobalContext from "../context/main-context";
-import { Button } from "../components/ButtonMain";
+import { Button } from "../components/buttons/ButtonMain";
 import { authRequest } from "../requests/auth";
-import { TabsControl } from "../components/Navigation/TabsControl";
+import { TabsControl } from "../components/navigation/TabsControl";
 
 class AuthPage extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@ import GlobalContext from "../../context/main-context";
 
 import { EventItem } from "./EventItem";
 import { EventDetails } from "./EventDetails";
-import { Spinner } from "../Spinner/Spinner";
+import { Spinner } from "../core/Spinner";
 
 export const EventList = props => {
   const context = useContext(GlobalContext);

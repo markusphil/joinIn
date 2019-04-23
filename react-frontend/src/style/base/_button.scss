@@ -1,0 +1,6 @@
+button {
+  @include fontdef;
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Modal from "../Modal/Modal";
+import Modal from "../core/Modal";
 import { bookEventRequest } from "../../requests/bookEvent";
 
 export const EventDetails = props => {

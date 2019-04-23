@@ -1,0 +1,21 @@
+.add-icon {
+  stroke: $secondary;
+  position: relative;
+  margin: 0;
+  top: 2px;
+}
+
+.btn-add {
+  background-color: $primary;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0px;
+  @include shadow-1;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: $primary-dark;
+  }
+}

@@ -9,21 +9,24 @@
   //primary button
   &.primary {
     background-color: $primary;
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $primary-dark;
     }
   }
   //inactive button
   &.inactive {
     background-color: $inactive;
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $inactive-dark;
     }
   }
   //dangerous button
   &.danger {
     background-color: $danger;
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $danger-dark;
     }
   }

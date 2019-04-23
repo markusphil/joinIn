@@ -4,8 +4,9 @@ import GlobalContext from "../context/main-context";
 
 import { eventsRequest } from "../requests/events";
 
-import { EventList } from "../components/Events/EventList";
-import { EventForm } from "../components/Events/EventForm";
+import { EventList } from "../components/events/EventList";
+import { EventForm } from "../components/events/EventForm";
+import { AddButton } from "../components/buttons/AddButton";
 
 class ExplorePage extends Component {
   state = {
@@ -83,9 +84,7 @@ class ExplorePage extends Component {
         <div>
           <h1>The Events Page</h1>
           {this.context.token && (
-            <button className="btn" onClick={this.openModalHandler}>
-              Create Event
-            </button>
+            <AddButton type="add-event" action={this.openModalHandler} />
           )}
         </div>
         <EventList

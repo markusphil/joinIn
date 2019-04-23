@@ -22,4 +22,8 @@ input {
   @include fontdef;
   @include border-base;
   @include border-color;
+  &:focus {
+    outline: none;
+    background-color: rgba($primary, 0.1);
+  }
 }

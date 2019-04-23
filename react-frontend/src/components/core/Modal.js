@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "../ButtonMain";
+import { Button } from "../buttons/ButtonMain";
+import { CloseButton } from "../buttons/CloseButton";
 
 const modal = props => (
   <React.Fragment>
@@ -11,12 +12,14 @@ const modal = props => (
       <section className="modal-content">{props.children}</section>
       <section className="modal-actions">
         {props.canCancel && (
-          <Button status="danger" action={props.onCancel}>
-            Cancel
-          </Button>
+          <CloseButton action={props.onCancel} type="close" />
         )}
         {props.canConfirm && (
-          <Button status={props.buttonStatus} action={props.onConfirm}>
+          <Button
+            status={props.buttonStatus}
+            action={props.onConfirm}
+            type={props.buttonType}
+          >
             {props.confirmText}
           </Button>
         )}
