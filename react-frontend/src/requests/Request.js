@@ -10,11 +10,15 @@ export const graphRequest = (body, token) => {
     body: JSON.stringify(body),
     headers: headers
   }).then(res => {
-    return res.json().then(err => {
+    return res.json().then(res => {
       //check for error
-      err.errors.map(error => {
-        throw new Error(error.message);
-      });
+      if (res.errors) {
+        res.errors.map(error => {
+          throw new Error(error.message);
+        });
+      } else {
+        return res;
+      }
     });
   });
 };
