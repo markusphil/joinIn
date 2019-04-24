@@ -36,6 +36,7 @@ export const EventList = props => {
       {context.selectedEvent && (
         <EventDetails
           token={context.token}
+          userId={context.userId}
           selectedEvent={context.selectedEvent}
           closeModal={props.closeModal}
           history={props.history}

@@ -10,9 +10,15 @@ class GlobalState extends Component {
     userName: null,
     profilePic: null,
     isLoading: false,
-    selectedEvent: null
+    selectedEvent: null,
+    events: [],
+    bookings: [],
+    message: {
+      status: null,
+      text: null
+    }
   };
-
+  //functions to handle login token
   componentWillMount() {
     localStorage.getItem("token") &&
       this.setState({
@@ -48,7 +54,7 @@ class GlobalState extends Component {
     localStorage.removeItem("userName");
     localStorage.removeItem("profilePic");
   };
-
+  //loading state
   startLoading = () => {
     this.setState({ isLoading: true });
   };
@@ -56,13 +62,35 @@ class GlobalState extends Component {
   finishLoading = () => {
     this.setState({ isLoading: false });
   };
-
+  //selected event (Event Details)
   setSelected = event => {
     this.setState({ selectedEvent: event });
   };
 
   clearSelected = () => {
     this.setState({ selectedEvent: null });
+  };
+  //Events / Bookings lists
+  updateEvents = newArray => {
+    this.setState({ events: newArray });
+  };
+
+  updateBookings = newArray => {
+    this.setState({ bookings: newArray });
+  };
+  clearLists = () => {
+    this.setState({ events: [], bookings: [] });
+  };
+  //Handle Messages
+  updateMessage = (status, text) => {
+    let newMessage = {
+      status: status,
+      text: text
+    };
+    this.setState({ message: newMessage });
+  };
+  clearMessage = () => {
+    this.setState({ message: { status: null, text: null } });
   };
 
   render() {
@@ -80,7 +108,15 @@ class GlobalState extends Component {
           finishLoading: this.finishLoading,
           selectedEvent: this.state.selectedEvent,
           setSelected: this.setSelected,
-          clearSelected: this.clearSelected
+          clearSelected: this.clearSelected,
+          events: this.state.events,
+          updateEvents: this.updateEvents,
+          bookings: this.state.bookings,
+          updateBookings: this.updateBookings,
+          clearLists: this.clearLists,
+          message: this.state.message,
+          updateMessage: this.updateMessage,
+          clearMessage: this.clearMessage
         }}
       >
         {this.props.children}

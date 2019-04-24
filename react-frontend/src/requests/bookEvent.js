@@ -8,6 +8,24 @@ export const bookEventRequest = (id, token) => {
                       _id
                       createdAt
                       updatedAt
+                      event {
+                        _id
+                        title
+                        description
+                        date
+                        location
+                        teaserImage
+                        creator {
+                          _id
+                          name
+                          profilePic
+                        } 
+                        attendees {
+                            _id
+                            name
+                            profilePic
+                        }
+                      }
                   }
               }`,
     variables: {

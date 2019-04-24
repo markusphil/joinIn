@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import Modal from "../core/Modal";
 import { createEventRequest } from "../../requests/createEvent";
+import { Button } from "../buttons/ButtonMain";
 
 export const EventForm = props => {
   //using Hooks for Refs
@@ -42,14 +43,7 @@ export const EventForm = props => {
 
   return (
     <React.Fragment>
-      <Modal
-        title="Add Event"
-        canCancel
-        canConfirm
-        onCancel={props.closeModal}
-        onConfirm={confirmModalHandler}
-        confirmText={"Create Event"}
-      >
+      <Modal title="Add Event" onCancel={props.closeModal}>
         <form>
           <div className="form-control">
             <label htmlFor="title">Title</label>
@@ -68,6 +62,15 @@ export const EventForm = props => {
             <textarea id="description" rows="4" ref={descriptionRef} />
           </div>
         </form>
+        <div className="modal-actions">
+          <Button
+            status="primary"
+            action={confirmModalHandler}
+            type="create_event"
+          >
+            Create Event
+          </Button>
+        </div>
       </Modal>
     </React.Fragment>
   );

@@ -10,31 +10,35 @@ import { EventList } from "../components/events/EventList";
 import { BookingChart } from "../components/legacy/BookingChart";
 import { BookingList } from "../components/legacy/BookingList";
 import { TabsControl } from "../components/navigation/TabsControl";
+import { fetchBookings } from "../context/fetchBookings";
 
 class MyEventsPage extends Component {
   state = {
     bookings: [],
-    isJoined: true
+    isJoinedList: true
   };
   static contextType = GlobalContext;
 
   componentDidMount() {
-    this.fetchBookings();
+    //this.fetchBookings();
+    fetchBookings(this.context);
   }
 
-  fetchBookings = () => {
-    this.setState({ isLoading: true });
+  /* fetchBookings = () => {
+    this.context.startLoading();
 
     bookingsRequest(this.context.token)
       .then(resData => {
         const fetchedBookings = resData.data.bookings;
-        this.setState({ bookings: fetchedBookings, isLoading: false });
+        this.context.updateBookings(fetchedBookings);
+        this.context.finishLoading();
       })
       .catch(err => {
         console.log(err);
-        this.setState({ isLoading: false });
+        this.context.finishLoading();
       });
-  };
+  }; */
+
   deleteBookingHandler = bookingId => {
     cancelBookingRequest(bookingId, this.context.token)
       .then(resData => {
@@ -53,7 +57,7 @@ class MyEventsPage extends Component {
 
   changeTabHandler = () => {
     this.setState(state => {
-      return { isJoined: !state.isJoined };
+      return { isJoinedList: !state.isJoinedList };
     });
   };
 
@@ -66,24 +70,24 @@ class MyEventsPage extends Component {
     return (
       <React.Fragment>
         <TabsControl
-          activeTab={this.state.isJoined}
+          activeTab={this.state.isJoinedList}
           onChange={this.changeTabHandler}
           tab1="Joined Events"
           tab2="Created Events"
         />
-        {this.state.isJoined === true ? (
+        {this.state.isJoinedList === true ? (
           this.context.isLoading ? (
             <Spinner />
           ) : (
             <div>
               <EventList
-                events={this.getEvents(this.state.bookings)}
+                events={this.getEvents(this.context.bookings)}
                 closeModal={() => this.context.clearSelected()}
                 history={this.props.history}
               />
               <h3>Old List for Debugging:</h3>
               <BookingList
-                bookings={this.state.bookings}
+                bookings={this.context.bookings}
                 onDelete={this.deleteBookingHandler}
               />
             </div>

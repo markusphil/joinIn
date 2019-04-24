@@ -10,15 +10,14 @@ import { AddButton } from "../components/buttons/AddButton";
 
 class ExplorePage extends Component {
   state = {
-    addEvent: false,
-    fetchedEvents: []
+    addEvent: false
   };
+
   //Property to check if component is active (cleanup)
   isActive = true;
 
   static contextType = GlobalContext;
 
-  //LifecycleMethods
   componentDidMount() {
     this.fetchEvents();
   }
@@ -27,25 +26,26 @@ class ExplorePage extends Component {
   }
 
   fetchEvents() {
-    this.setState({ isLoading: true });
+    this.context.startLoading();
 
     eventsRequest()
       .then(resData => {
         const events = resData.data.events;
         console.log(events);
         if (this.isActive) {
-          this.setState({ fetchedEvents: events, isLoading: false });
+          this.context.updateEvents(events);
+          this.context.finishLoading();
         }
       })
       .catch(err => {
         console.log(err);
         if (this.isActive) {
-          this.setState({ isLoading: false });
+          this.context.finishLoading();
         }
       });
   }
 
-  openModalHandler = () => {
+  openEventFromHandler = () => {
     this.setState({ addEvent: true });
   };
   closeModalHandler = () => {
@@ -54,21 +54,19 @@ class ExplorePage extends Component {
   };
 
   addEventHandler = resData => {
-    this.setState(prevState => {
-      const updatedEvents = [...prevState.fetchedEvents];
-      updatedEvents.push({
-        _id: resData.data.createEvent._id,
-        title: resData.data.createEvent.title,
-        description: resData.data.createEvent.description,
-        date: resData.data.createEvent.date,
-        location: resData.data.createEvent.location,
-        creator: {
-          _id: this.context.userId
-        },
-        attendees: []
-      });
-      return { fetchedEvents: updatedEvents };
+    const updatedEvents = [...this.context.events];
+    updatedEvents.push({
+      _id: resData.data.createEvent._id,
+      title: resData.data.createEvent.title,
+      description: resData.data.createEvent.description,
+      date: resData.data.createEvent.date,
+      location: resData.data.createEvent.location,
+      creator: {
+        _id: this.context.userId
+      },
+      attendees: []
     });
+    this.context.updateEvents(updatedEvents);
   };
 
   render() {
@@ -84,11 +82,11 @@ class ExplorePage extends Component {
         <div>
           <h1>The Events Page</h1>
           {this.context.token && (
-            <AddButton type="add-event" action={this.openModalHandler} />
+            <AddButton type="add-event" action={this.openEventFromHandler} />
           )}
         </div>
         <EventList
-          events={this.state.fetchedEvents}
+          events={this.context.events}
           closeModal={this.closeModalHandler}
           history={this.props.history}
         />

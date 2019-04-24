@@ -12,5 +12,13 @@ export default React.createContext({
   startLoading: () => {},
   finishLoading: () => {},
   setSelected: event => {},
-  clearSelected: () => {}
+  clearSelected: () => {},
+  events: [],
+  bookings: [],
+  updateEvents: newArray => {},
+  updateBookings: newArray => {},
+  clearLists: () => {},
+  message: { status: null, text: null },
+  updateMessage: (status, text) => {},
+  clearMessage: () => {}
 });
