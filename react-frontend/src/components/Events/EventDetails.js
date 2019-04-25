@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import GlobalContext from "../../context/main-context";
 
 import Modal from "../core/Modal";
-import { Button } from "../buttons/ButtonMain";
 import { bookEventRequest } from "../../requests/bookEvent";
 import { cancelBookingRequest } from "../../requests/cancelBooking";
 import { fetchBookings } from "../../context/fetchBookings";
+import { DetailsBody } from "./EventDetails/DetailsBody";
+import { DetailsControl } from "./EventDetails/DetailsControl";
 
 /*this component handles a big chunk of the app's logic and therfore should become a page instead.
   But to archive that, I'll need dynamic routing and a good amount of restructuring. So for now I will focus on getting all functionality working...
@@ -16,6 +17,30 @@ export const EventDetails = props => {
   const { closeModal, history } = props;
 
   const context = useContext(GlobalContext);
+
+  const [relatedBooking, setRelatedBooking] = useState(null);
+
+  console.log("Rendering..");
+
+  useEffect(() => {
+    if (context.selectedEvent.attendees.some(x => x._id === context.userId)) {
+      getRelatedBooking();
+    }
+  }, [context.bookings]);
+
+  const getRelatedBooking = async () => {
+    let fetchedBookings = null;
+    //fetch bookings if aren't fetched allready
+    if (context.bookings.length === 0) {
+      fetchedBookings = await fetchBookings(context);
+    } else {
+      fetchedBookings = context.bookings;
+    }
+    let booking = fetchedBookings.find(
+      x => x.event._id === context.selectedEvent._id
+    );
+    setRelatedBooking(booking);
+  };
 
   const bookEventHandler = () => {
     if (!context.token) {
@@ -43,7 +68,6 @@ export const EventDetails = props => {
         updatedBookings.push(resData.data.bookEvent);
         context.updateBookings(updatedBookings);
 
-        closeModal();
         //display message!
       })
       .catch(err => {
@@ -52,29 +76,11 @@ export const EventDetails = props => {
   };
 
   const cancelBookingHandler = async () => {
-    /*
-    maybe I should run this check in component did mount / useEffect
-    set selected booking info to local state with hooks?
-    then i could access it in render()
-    */
-
-    let fetchedBookings = null;
-    //fetch bookings if aren't fetched allready
-    if (context.bookings.length === 0) {
-      fetchedBookings = await fetchBookings(context);
-    } else {
-      fetchedBookings = context.bookings;
-    }
-    let bookingId = fetchedBookings.find(
-      x => x.event._id === context.selectedEvent._id
-    )._id;
-    console.log(bookingId);
-    //--Cancel Booking Logic--
-
-    cancelBookingRequest(bookingId, context.token);
+    //calling request
+    cancelBookingRequest(relatedBooking._id, context.token);
     //update the global bookings state
-    const updatedBookings = fetchedBookings.filter(booking => {
-      return booking._id !== bookingId;
+    const updatedBookings = context.bookings.filter(booking => {
+      return booking._id !== relatedBooking._id;
     });
     context.updateBookings(updatedBookings);
 
@@ -93,58 +99,20 @@ export const EventDetails = props => {
     //display message
   };
 
-  const buttonTypeChecker = () => {
-    if (!context.token) {
-      return (
-        <Button
-          status="inactive"
-          action={bookEventHandler}
-          type="redirect_login"
-        >
-          to Login
-        </Button>
-      );
-      //"to login" type = inactive action=redirect
-    } else if (
-      context.selectedEvent.attendees.some(x => x._id === context.userId)
-    ) {
-      return (
-        <Button status="danger" action={cancelBookingHandler} type="cancel">
-          Cancel
-        </Button>
-      );
-      // "cancel "type= danger  action = cancelBooking handler
-    } else if (context.selectedEvent.creator._id === context.userId) {
-      return (
-        <React.Fragment>
-          <Button status="inactive" type="edit">
-            edit
-          </Button>
-          <Button status="inactive" type="delete">
-            delete
-          </Button>
-        </React.Fragment>
-      );
-    } else {
-      return (
-        <Button status="primary" action={bookEventHandler} type="join">
-          Join
-        </Button>
-      );
-      //"join" primary bookEventHandler
-    }
-  };
-
   return (
     <React.Fragment>
       <Modal title={context.selectedEvent.title} onCancel={props.closeModal}>
-        <div>
-          <p>location: {context.selectedEvent.location}</p>
-          <p>Date: {context.selectedEvent.date}</p>
-          <p>Description: {context.selectedEvent.description}</p>
-        </div>
+        <DetailsBody
+          selectedEvent={context.selectedEvent}
+          relatedBooking={relatedBooking}
+        />
 
-        <div className="modal-actions">{buttonTypeChecker()}</div>
+        <DetailsControl
+          context={context}
+          relatedBooking={relatedBooking}
+          bookEvent={bookEventHandler}
+          cancelBooking={cancelBookingHandler}
+        />
       </Modal>
     </React.Fragment>
   );

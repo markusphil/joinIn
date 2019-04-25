@@ -2,13 +2,11 @@ import React, { Component } from "react";
 
 import GlobalContext from "../context/main-context";
 
-import { bookingsRequest } from "../requests/bookings";
 import { cancelBookingRequest } from "../requests/cancelBooking";
 
 import { Spinner } from "../components/core/Spinner";
 import { EventList } from "../components/events/EventList";
 import { BookingChart } from "../components/legacy/BookingChart";
-import { BookingList } from "../components/legacy/BookingList";
 import { TabsControl } from "../components/navigation/TabsControl";
 import { fetchBookings } from "../context/fetchBookings";
 
@@ -20,24 +18,8 @@ class MyEventsPage extends Component {
   static contextType = GlobalContext;
 
   componentDidMount() {
-    //this.fetchBookings();
     fetchBookings(this.context);
   }
-
-  /* fetchBookings = () => {
-    this.context.startLoading();
-
-    bookingsRequest(this.context.token)
-      .then(resData => {
-        const fetchedBookings = resData.data.bookings;
-        this.context.updateBookings(fetchedBookings);
-        this.context.finishLoading();
-      })
-      .catch(err => {
-        console.log(err);
-        this.context.finishLoading();
-      });
-  }; */
 
   deleteBookingHandler = bookingId => {
     cancelBookingRequest(bookingId, this.context.token)
@@ -79,18 +61,11 @@ class MyEventsPage extends Component {
           this.context.isLoading ? (
             <Spinner />
           ) : (
-            <div>
-              <EventList
-                events={this.getEvents(this.context.bookings)}
-                closeModal={() => this.context.clearSelected()}
-                history={this.props.history}
-              />
-              <h3>Old List for Debugging:</h3>
-              <BookingList
-                bookings={this.context.bookings}
-                onDelete={this.deleteBookingHandler}
-              />
-            </div>
+            <EventList
+              events={this.getEvents(this.context.bookings)}
+              closeModal={() => this.context.clearSelected()}
+              history={this.props.history}
+            />
           )
         ) : (
           <BookingChart />

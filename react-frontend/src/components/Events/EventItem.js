@@ -1,6 +1,10 @@
 import React from "react";
 import classnames from "classnames";
 
+import { DateIcon } from "../../icons/DateIcon";
+import { TimeIcon } from "../../icons/TimeIcon";
+import { LocationIcon } from "../../icons/LocationIcon";
+
 export const EventItem = props => (
   <li
     key={props.eventId}
@@ -26,8 +30,18 @@ export const EventItem = props => (
       }
     >
       <h2>{props.title}</h2>
-      <p>{props.location}</p>
-      <p>{new Date(props.date).toLocaleDateString()}</p>
+      <p>
+        <LocationIcon />
+        {props.location}
+      </p>
+      <p>
+        <DateIcon />
+        {new Date(props.date).toLocaleDateString()}
+      </p>
+      <p>
+        <TimeIcon />
+        {new Date(props.date).toLocaleTimeString()}
+      </p>
     </div>
   </li>
 );
