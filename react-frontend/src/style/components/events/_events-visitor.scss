@@ -1,0 +1,15 @@
+.visitors-teaser-box {
+  @include border-base;
+  background-color: $text;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  .avatar-ring {
+    transform: translateX(20px);
+    margin-left: -20px;
+  }
+  p {
+    color: $secondary;
+    margin-left: 20px;
+  }
+}
