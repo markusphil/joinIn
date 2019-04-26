@@ -5,11 +5,8 @@ const modal = props => (
   <React.Fragment>
     <div className="backdrop" />
     <div className="modal">
-      <header>
-        <h1>{props.title}</h1>
-      </header>
       <CloseButton action={props.onCancel} type="close" />
-      <section className="modal-content">{props.children}</section>
+      {props.children}
     </div>
   </React.Fragment>
 );

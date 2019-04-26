@@ -26,7 +26,7 @@ It includes the following technologies & libaries:
 
 ---
 
-Starting from the tutorial I made/planed following changes:
+Starting from the tutorial I planed/made following changes:
 
 ## API
 
@@ -48,6 +48,7 @@ Starting from the tutorial I made/planed following changes:
   - [x] extend context
   - [x] separate styling
   - [x] make Event-Components reusable
+  - [x] keep state in sync without fetching
   - [ ] bonus: convert to Hooks API
 - [x] store token locally\*
 - [ ] handle token expiration
@@ -60,7 +61,7 @@ Starting from the tutorial I made/planed following changes:
   - [x] create basic variables/mixins
   - [x] Login form
   - [x] Navbar
-  - [ ] Buttons (different variants)
+  - [x] Buttons (different variants)
   - [ ] Modal
   - [x] Event Cards
   - [ ] Event Details
@@ -86,15 +87,17 @@ Starting from the tutorial I made/planed following changes:
 
 ## Design
 
-- [ ] chose color palete
+- [ ] chose color palette
 - [ ] finde name
 - [ ] create generic Logo
-- [ ] build custom loader
+- [ ] build custom spinner
+- [x] add icons
 
 ## Future additions
 
-- dynamic pages for events
-- add disqus?
-- move login to modal
+- dynamic pages/routes for events
+  - with disqus?
+  - move login to modal
 - add animations (GSAP)
 - add user pages
+- redesign elements

@@ -30,18 +30,18 @@ export const EventItem = props => (
       }
     >
       <h2>{props.title}</h2>
-      <p>
+      <span className="event-card-info">
         <LocationIcon />
         {props.location}
-      </p>
-      <p>
+      </span>
+      <span>
         <DateIcon />
         {new Date(props.date).toLocaleDateString()}
-      </p>
-      <p>
+      </span>
+      <span>
         <TimeIcon />
         {new Date(props.date).toLocaleTimeString()}
-      </p>
+      </span>
     </div>
   </li>
 );

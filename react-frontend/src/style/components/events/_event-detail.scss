@@ -1,0 +1,10 @@
+.event-details-teaser {
+  width: 300px;
+  height: 400px;
+  background-size: cover;
+  @include border-left;
+}
+.event-details-body {
+  width: calc(100% - 300px);
+  padding: 20px;
+}

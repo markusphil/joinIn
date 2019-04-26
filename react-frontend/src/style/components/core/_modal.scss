@@ -9,11 +9,24 @@
 }
 
 .modal {
-  width: 90%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background: $secondary;
   position: fixed;
   top: 20vh;
-  left: 5%;
+  left: calc((100% - 800px) / 2); //I need a mediaquery for that!
   z-index: z("modal");
+  @include shadow-1;
+  @include border-base;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.modal-actions {
+  position: absolute;
+  align-self: center;
+  bottom: 20px;
+  margin: 0 auto;
 }
