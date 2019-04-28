@@ -29,6 +29,21 @@ class GlobalState extends Component {
       });
   }
 
+  componentDidUpdate() {
+    const tokenExpirationTime = new Date(
+      parseInt(localStorage.getItem("tokenExpiration"))
+    );
+    const now = Date.now();
+    const remainingTime = tokenExpirationTime - now;
+    if (now >= tokenExpirationTime) {
+      this.logout();
+    } else {
+      console.log(
+        "remaining Time: " + Math.floor(remainingTime / (1000 * 60)) + "min"
+      );
+    }
+  }
+
   login = (token, userId, userName, profilePic, tokenExpiration) => {
     this.setState({
       token: token,
@@ -40,6 +55,8 @@ class GlobalState extends Component {
     localStorage.setItem("userId", userId);
     localStorage.setItem("userName", userName);
     localStorage.setItem("profilePic", profilePic);
+    let tokenExpirationTime = Date.now() + tokenExpiration * 60 * 60 * 1000;
+    localStorage.setItem("tokenExpiration", tokenExpirationTime);
   };
 
   logout = () => {
@@ -53,6 +70,7 @@ class GlobalState extends Component {
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
     localStorage.removeItem("profilePic");
+    localStorage.removeItem("tokenExpiration");
   };
   //loading state
   startLoading = () => {

@@ -46,7 +46,7 @@ module.exports = {
       userName: user.name,
       profilePic: user.profilePic,
       token: token,
-      tokenExpiration: 1
+      tokenExpiration: 100
     };
   }
 };
