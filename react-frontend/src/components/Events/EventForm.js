@@ -44,23 +44,27 @@ export const EventForm = props => {
   return (
     <React.Fragment>
       <Modal onCancel={props.closeModal}>
-        <h1>Add Event</h1>
-        <form>
-          <div className="form-control">
+        <h1 className="event-form-title">Add Event</h1>
+        <form className="event-form">
+          <div className="form-input-50">
             <label htmlFor="title">Title</label>
             <input type="text" id="title" ref={titleRef} />
-
+          </div>
+          <div className="form-input-50">
             <label htmlFor="date">Date</label>
             <input type="datetime-local" id="date" ref={dateRef} />
-
+          </div>
+          <div className="form-input-50">
             <label htmlFor="location">Location</label>
             <input type="text" id="location" ref={locationRef} />
-
+          </div>
+          <div className="form-input-50">
             <label htmlFor="teaser-img">Teaser Image</label>
             <input type="text" id="teaser-img" ref={teaserImageRef} />
-
+          </div>
+          <div className="form-text-area">
             <label htmlFor="description">Description</label>
-            <textarea id="description" rows="4" ref={descriptionRef} />
+            <textarea id="description" rows="6" ref={descriptionRef} />
           </div>
         </form>
         <div className="modal-actions">

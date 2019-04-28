@@ -8,6 +8,20 @@
   width: 90%;
 }
 
+.form-input-50 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2em;
+  width: 45%;
+}
+
+.form-text-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2em;
+  width: 93%;
+}
+
 .form-actions {
   display: flex;
   flex-direction: row;
@@ -22,6 +36,19 @@ input {
   @include fontdef;
   @include border-base;
   @include border-color;
+  &:focus {
+    outline: none;
+    background-color: rgba($primary, 0.1);
+  }
+}
+
+textarea {
+  padding: 0.5em;
+  background-color: rgba($text, 0.1); //$primary-light;
+  @include fontdef;
+  @include border-base;
+  @include border-color;
+  resize: none;
   &:focus {
     outline: none;
     background-color: rgba($primary, 0.1);
