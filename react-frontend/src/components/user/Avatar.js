@@ -1,8 +1,9 @@
 import React from "react";
+import classnames from "classnames";
 
 export const Avatar = props => {
   return (
-    <div className="avatar-ring">
+    <div className={classnames("avatar-ring", props.type)}>
       <div
         className="avatar-img"
         style={

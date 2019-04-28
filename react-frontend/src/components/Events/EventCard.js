@@ -1,11 +1,10 @@
 import React from "react";
 import classnames from "classnames";
 
-import { DateIcon } from "../../icons/DateIcon";
-import { TimeIcon } from "../../icons/TimeIcon";
-import { LocationIcon } from "../../icons/LocationIcon";
+import { Textfit } from "react-textfit";
+import { EventInfo } from "./EventDetails/EventInfo";
 
-export const EventItem = props => (
+export const EventCard = props => (
   <li
     key={props.eventId}
     className={
@@ -29,19 +28,10 @@ export const EventItem = props => (
           : "event-card-body"
       }
     >
-      <h2>{props.title}</h2>
-      <span className="event-card-info">
-        <LocationIcon />
-        {props.location}
-      </span>
-      <span>
-        <DateIcon />
-        {new Date(props.date).toLocaleDateString()}
-      </span>
-      <span>
-        <TimeIcon />
-        {new Date(props.date).toLocaleTimeString()}
-      </span>
+      <Textfit max={30} className="event-card-title">
+        {props.title}
+      </Textfit>
+      <EventInfo location={props.location} date={props.date} />
     </div>
   </li>
 );

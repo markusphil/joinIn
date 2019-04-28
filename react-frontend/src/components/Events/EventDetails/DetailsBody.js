@@ -1,5 +1,7 @@
 import React from "react";
 import { VistorTeaser } from "./VisitorTeaser";
+import { VistorList } from "./VisitorList";
+import { EventInfo } from "./EventInfo";
 
 export const DetailsBody = props => (
   <React.Fragment>
@@ -12,20 +14,49 @@ export const DetailsBody = props => (
               backgroundImage: `url("https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png")`
             }
       }
-    />
+    >
+      {!props.showVisitors && (
+        <VistorTeaser
+          selectedEvent={props.selectedEvent}
+          showVisitorsHandler={props.showVisitorsHandler}
+        />
+      )}
+      {props.showVisitors && (
+        <VistorList
+          selectedEvent={props.selectedEvent}
+          showVisitorsHandler={props.showVisitorsHandler}
+        />
+      )}
+    </div>
     <div className="event-details-body">
       <h1>{props.selectedEvent.title}</h1>
-      <p>location: {props.selectedEvent.location}</p>
-      <p>Date: {new Date(props.selectedEvent.date).toLocaleDateString()}</p>
-      <p>Time: {new Date(props.selectedEvent.date).toLocaleTimeString()}</p>
-      <VistorTeaser selectedEvent={props.selectedEvent} />
-      <p>Description: {props.selectedEvent.description}</p>
-      {props.relatedBooking && (
-        <p>
-          You joined at:{" "}
-          {new Date(props.relatedBooking.createdAt).toLocaleDateString()}
-        </p>
-      )}
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <EventInfo
+                location={props.selectedEvent.location}
+                date={props.selectedEvent.date}
+              />
+            </td>
+            <td>
+              {props.relatedBooking && (
+                <p>
+                  You joined at:{" "}
+                  {new Date(
+                    props.relatedBooking.createdAt
+                  ).toLocaleDateString()}
+                </p>
+              )}
+              {props.selectedEvent.creator._id === props.userId && (
+                <p>You are the creator of this event</p>
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>{props.selectedEvent.description}</p>
     </div>
   </React.Fragment>
 );

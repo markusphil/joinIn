@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import GlobalContext from "../../context/main-context";
 
-import { EventItem } from "./EventItem";
+import { EventCard } from "./EventCard";
 import { EventDetails } from "./EventDetails";
 import { Spinner } from "../core/Spinner";
 
@@ -16,7 +16,7 @@ export const EventList = props => {
 
   const events = props.events.map(event => {
     return (
-      <EventItem
+      <EventCard
         key={event._id}
         eventId={event._id}
         title={event.title}

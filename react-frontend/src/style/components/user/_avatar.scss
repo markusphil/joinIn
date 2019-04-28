@@ -4,6 +4,9 @@
   background-color: $primary;
   border-radius: 50%;
   margin-right: 0.3em;
+  &.secondary {
+    background-color: $secondary;
+  }
 }
 .avatar-img {
   position: relative;

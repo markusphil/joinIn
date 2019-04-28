@@ -7,12 +7,12 @@ export const VistorTeaser = props => {
     props.selectedEvent.attendees.length - prevVisitors.length;
 
   return (
-    <div className="visitors-teaser-box">
+    <div className="visitors-teaser-box" onClick={props.showVisitorsHandler}>
       <Avatar img={props.selectedEvent.creator.profilePic} />
       {prevVisitors.map(vis => (
-        <Avatar img={vis.profilePic} />
+        <Avatar img={vis.profilePic} type="secondary" key={vis._id} />
       ))}
-      <p>+ {visitorsCount}</p>
+      {visitorsCount > 0 && <p>+ {visitorsCount}</p>}
     </div>
   );
 };

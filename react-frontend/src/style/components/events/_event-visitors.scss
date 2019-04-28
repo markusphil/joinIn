@@ -1,0 +1,48 @@
+.visitors-teaser-box {
+  @include border-base;
+  @include shadow-1;
+  position: absolute;
+  bottom: 20px;
+  left: 150px;
+  transform: translateX(-50%);
+  background-color: rgba($text, 0.95);
+  padding: 8px;
+  padding-right: 26px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  text-align: center;
+  .avatar-ring {
+    transform: translateX(20px);
+    margin-left: -20px;
+  }
+  p {
+    color: $secondary;
+    margin: 0 -18px 0 20px;
+    font-size: 1.2rem;
+    line-height: 46px;
+  }
+  &:hover {
+    background-color: rgba($primary-dark, 0.95);
+  }
+}
+.visitors-list-wrapper {
+  background-color: rgba($text, 0.95);
+  height: calc(100% - 60px);
+  color: $secondary;
+  @include border-left;
+  padding: 50px 20px 10px 20px;
+  overflow: hidden;
+  .close-icon {
+    stroke: $secondary;
+    &:hover {
+      stroke: $primary;
+    }
+  }
+  .btn-close {
+    left: 260px;
+  }
+}
+.visitors-table {
+  border-spacing: 5px;
+}

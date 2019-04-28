@@ -19,6 +19,7 @@ export const EventDetails = props => {
   const context = useContext(GlobalContext);
 
   const [relatedBooking, setRelatedBooking] = useState(null);
+  const [showVisitors, setShowVisitors] = useState(false);
 
   console.log("Rendering..");
 
@@ -99,12 +100,20 @@ export const EventDetails = props => {
     //display message
   };
 
+  const showVisitorsHandler = () => {
+    let newState = !showVisitors;
+    setShowVisitors(newState);
+  };
+
   return (
     <React.Fragment>
       <Modal title={context.selectedEvent.title} onCancel={props.closeModal}>
         <DetailsBody
           selectedEvent={context.selectedEvent}
+          userId={context.userId}
           relatedBooking={relatedBooking}
+          showVisitors={showVisitors}
+          showVisitorsHandler={showVisitorsHandler}
         />
 
         <DetailsControl

@@ -2,9 +2,23 @@
   width: 300px;
   height: 400px;
   background-size: cover;
+  background-position: 50% 50%;
   @include border-left;
 }
 .event-details-body {
-  width: calc(100% - 300px);
+  width: calc(100% - 340px);
   padding: 20px;
+  table {
+    width: 100%;
+  }
+  h1 {
+    margin-top: 0px;
+    max-width: 420px;
+  }
+  td {
+    vertical-align: top;
+    p {
+      margin: 5px;
+    }
+  }
 }

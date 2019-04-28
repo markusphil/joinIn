@@ -21,19 +21,13 @@
   }
 }
 .event-card-body {
-  //text-align: right;
   padding: 5px 20px 5px 40px;
-  width: 40%;
+  width: 45%;
   height: calc(100% - 10px);
   background-color: rgba($secondary, 0.9);
   float: right;
   @include border-right;
   @include shadow-1;
-
-  h2 {
-    color: $primary;
-    margin: 0;
-  }
   p {
     margin: 2px;
   }
@@ -43,8 +37,18 @@
     background-color: rgba($primary, 0.9);
     color: $secondary;
 
-    h2 {
+    .event-card-title {
       color: $secondary;
     }
+    .svg-icon {
+      fill: $secondary;
+    }
   }
+}
+.event-card-title {
+  color: $primary;
+  margin-top: 6px;
+  width: 100%;
+  height: 40%;
+  font-weight: bold;
 }
