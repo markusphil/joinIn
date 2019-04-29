@@ -45,12 +45,10 @@ class GlobalState extends Component {
       return false;
     }
     const now = Date.now();
-    const remainingTime = tokenExpirationTime - now;
     if (now >= tokenExpirationTime) {
       this.logout();
       return false;
     } else {
-      console.log("remaining Time: " + Math.floor(remainingTime / 1000) + "s");
       return true;
     }
   };
@@ -66,7 +64,7 @@ class GlobalState extends Component {
     localStorage.setItem("userId", userId);
     localStorage.setItem("userName", userName);
     localStorage.setItem("profilePic", profilePic);
-    let tokenExpirationTime = Date.now() + tokenExpiration * 60 * 1000;
+    let tokenExpirationTime = Date.now() + tokenExpiration * 60 * 60 * 1000;
     localStorage.setItem("tokenExpiration", tokenExpirationTime);
   };
 

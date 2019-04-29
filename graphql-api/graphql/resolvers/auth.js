@@ -39,14 +39,14 @@ module.exports = {
     const token = jwt.sign(
       { userId: user.id, userName: user.name, profilePic: user.profilePic },
       "somesupersecretkey",
-      { expiresIn: "1m" }
+      { expiresIn: "100h" }
     );
     return {
       userId: user.id,
       userName: user.name,
       profilePic: user.profilePic,
       token: token,
-      tokenExpiration: 1
+      tokenExpiration: 100
     };
   }
 };
