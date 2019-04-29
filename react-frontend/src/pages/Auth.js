@@ -52,6 +52,7 @@ class AuthPage extends Component {
             resData.data.login.profilePic,
             resData.data.login.tokenExpiration
           );
+          this.context.updateMessage("success", "logged in");
         }
       })
       .catch(err => {

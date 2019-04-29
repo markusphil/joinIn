@@ -28,7 +28,7 @@ export const EventCard = props => (
           : "event-card-body"
       }
     >
-      <Textfit max={30} className="event-card-title">
+      <Textfit max={26} className="event-card-title">
         {props.title}
       </Textfit>
       <EventInfo location={props.location} date={props.date} />
