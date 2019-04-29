@@ -1,11 +1,10 @@
 # graphql-react-tutorial
 
-I started following Max' great tutorial for building a graphQL API and use it in a react fronted. Tutorial series: !add Link!
+I started following [Max' great tutorial](https://www.youtube.com/watch?v=7giZGFDGnkc&list=PL55RiY5tL51rG1x02Yyj93iypUuHYXcB_) for building a graphQL API and use it in a react fronted.
 
-Over time however I thought to bring it to a bigger more furnished project and here it is: **convoke** - a simple meetup clone.
+Over time however I thought to bring it to a bigger more furnished project and here it is: **Gang Up** - a simplified meet up clone, that allows you to create and join events.
 
 It includes the following technologies & libaries:
-!ADD LINKS!
 
 ### Backend
 
@@ -13,9 +12,9 @@ It includes the following technologies & libaries:
 - express
 - graphQL
 - mongoDB
-- mongoose
-- jwt
-- bcrypt
+- [mongoose](https://mongoosejs.com/)
+- [jwt](https://github.com/auth0/node-jsonwebtoken)
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 
 ### Frontend
 
@@ -72,6 +71,8 @@ Starting from the tutorial I planed/made following changes:
 - [x] display error messages
 - [ ] add tooltips
 - [x] auto-login after signup
+
+\*I am totaly aware that storing the token localy is a serious security issue. But for sake of simplicity I choose to stick to this solution. Aspecialy as I am not handeling any private Data (except the token itself).
 
 ## Testing
 
