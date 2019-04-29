@@ -100,3 +100,4 @@ const singleUser = async userId => {
 
 exports.transformEvent = transformEvent;
 exports.transformBooking = transformBooking;
+exports.singleUser = singleUser;

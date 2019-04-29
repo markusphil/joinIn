@@ -18,15 +18,22 @@ class GlobalState extends Component {
       text: null
     }
   };
-  //functions to handle login token
+
   componentWillMount() {
-    localStorage.getItem("token") &&
-      this.setState({
-        token: localStorage.getItem("token"),
-        userId: localStorage.getItem("userId"),
-        userName: localStorage.getItem("userName"),
-        profilePic: localStorage.getItem("profilePic")
-      });
+    //get userData from local storage if token isn't expired yet
+    const tokenExpirationTime = new Date(
+      parseInt(localStorage.getItem("tokenExpiration"))
+    );
+    const now = Date.now();
+    if (now <= tokenExpirationTime) {
+      localStorage.getItem("token") &&
+        this.setState({
+          token: localStorage.getItem("token"),
+          userId: localStorage.getItem("userId"),
+          userName: localStorage.getItem("userName"),
+          profilePic: localStorage.getItem("profilePic")
+        });
+    }
   }
 
   checkExpiration = () => {

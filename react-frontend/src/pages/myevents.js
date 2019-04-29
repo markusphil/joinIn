@@ -2,38 +2,36 @@ import React, { Component } from "react";
 
 import GlobalContext from "../context/main-context";
 
-import { cancelBookingRequest } from "../requests/cancelBooking";
-
 import { Spinner } from "../components/core/Spinner";
 import { EventList } from "../components/events/EventList";
-import { BookingChart } from "../components/legacy/BookingChart";
 import { TabsControl } from "../components/navigation/TabsControl";
 import { fetchBookings } from "../context/fetchBookings";
+import { createdEventsRequest } from "../requests/userCreatedEvents";
 
 class MyEventsPage extends Component {
   state = {
-    bookings: [],
+    createdEvents: [],
     isJoinedList: true
   };
   static contextType = GlobalContext;
 
   componentDidMount() {
     fetchBookings(this.context);
+    this.fetchCreatedEvents();
   }
 
-  deleteBookingHandler = bookingId => {
-    cancelBookingRequest(bookingId, this.context.token)
+  fetchCreatedEvents = () => {
+    this.context.startLoading();
+    createdEventsRequest(this.context.token, this.context.checkExpiration)
       .then(resData => {
-        this.setState(prevState => {
-          const updatedBookings = prevState.bookings.filter(booking => {
-            return booking._id !== bookingId;
-          });
-          return { bookings: updatedBookings };
-        });
         console.log(resData);
+        const fetchedEvents = resData.data.user.createdEvents;
+        this.setState({ createdEvents: fetchedEvents });
+        this.context.finishLoading();
       })
       .catch(err => {
         console.log(err);
+        this.context.finishLoading();
       });
   };
 
@@ -68,7 +66,11 @@ class MyEventsPage extends Component {
             />
           )
         ) : (
-          <BookingChart />
+          <EventList
+            events={this.state.createdEvents}
+            closeModal={() => this.context.clearSelected()}
+            history={this.props.history}
+          />
         )}
       </React.Fragment>
     );

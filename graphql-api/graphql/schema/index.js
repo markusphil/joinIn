@@ -55,6 +55,7 @@ module.exports = buildSchema(`
             events: [Event!]!
             bookings: [Booking!]!
             login(name: String!, password: String!): AuthData!
+            user: User!
         }
 
         type RootMutation {

@@ -20,9 +20,12 @@ module.exports = {
   },
   bookEvent: async (args, req) => {
     if (!req.isAuth) {
-      throw new Error("You must be logged in to book an event");
+      throw new Error("You must be logged in to join an event");
     }
     const fetchedEvent = await Event.findOne({ _id: args.eventId });
+    if (fetchedEvent.attendees.some(x => x == req.userId)) {
+      throw new Error("You already joined this event");
+    }
     const booking = new Booking({
       user: req.userId,
       event: fetchedEvent._id
