@@ -40,15 +40,17 @@ class GlobalState extends Component {
     const tokenExpirationTime = new Date(
       parseInt(localStorage.getItem("tokenExpiration"))
     );
+
+    if (!localStorage.getItem("tokenExpiration")) {
+      return false;
+    }
     const now = Date.now();
     const remainingTime = tokenExpirationTime - now;
     if (now >= tokenExpirationTime) {
       this.logout();
       return false;
     } else {
-      console.log(
-        "remaining Time: " + Math.floor(remainingTime / (1000 * 60)) + "min"
-      );
+      console.log("remaining Time: " + Math.floor(remainingTime / 1000) + "s");
       return true;
     }
   };

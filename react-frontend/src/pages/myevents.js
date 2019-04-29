@@ -17,7 +17,7 @@ class MyEventsPage extends Component {
 
   componentDidMount() {
     fetchBookings(this.context);
-    this.context.token && this.fetchCreatedEvents();
+    this.fetchCreatedEvents();
   }
 
   fetchCreatedEvents = () => {

@@ -4,6 +4,9 @@ import { Button } from "../../buttons/ButtonMain";
 
 export const DetailsControl = props => {
   const { context, relatedBooking, bookEvent, cancelBooking } = props;
+  const placeholderAction = () => {
+    context.updateMessage("warning", "Feature is not implemented yet!");
+  };
 
   const buttonTypeChecker = () => {
     if (!context.token) {
@@ -21,10 +24,10 @@ export const DetailsControl = props => {
     } else if (context.selectedEvent.creator._id === context.userId) {
       return (
         <React.Fragment>
-          <Button status="inactive" type="edit">
+          <Button status="inactive" type="edit" action={placeholderAction}>
             edit
           </Button>
-          <Button status="inactive" type="delete">
+          <Button status="inactive" type="delete" action={placeholderAction}>
             delete
           </Button>
         </React.Fragment>

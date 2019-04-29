@@ -76,7 +76,7 @@ export const EventDetails = props => {
         );
       })
       .catch(err => {
-        context.updateMessage("error", err);
+        context.updateMessage("error", err.message);
       });
   };
 
@@ -87,7 +87,7 @@ export const EventDetails = props => {
       context.token,
       context.checkExpiration
     ).catch(err => {
-      context.updateMessage("error", err);
+      context.updateMessage("error", err.message);
     });
     //update the global bookings state
     const updatedBookings = context.bookings.filter(booking => {

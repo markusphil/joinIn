@@ -51,10 +51,10 @@ Starting from the tutorial I planed/made following changes:
   - [x] keep state in sync without fetching
   - [ ] bonus: convert to Hooks API
 - [x] store token locally\*
-- [ ] handle token expiration
+- [x] handle token expiration
 - [x] access user/event images
 - [ ] add User menu
-- [ ] add visior list
+- [x] add visior list
 - [ ] add option to edit event
 - [ ] basic styling
   - [x] Implement SASS
@@ -62,14 +62,14 @@ Starting from the tutorial I planed/made following changes:
   - [x] Login form
   - [x] Navbar
   - [x] Buttons (different variants)
-  - [ ] Modal
+  - [x] Modal
   - [x] Event Cards
-  - [ ] Event Details
-  - [ ] Visitor List
-  - [ ] Event Form
+  - [x] Event Details
+  - [x] Visitor List
+  - [x] Event Form
   - [ ] User Menu
 - [x] catch errors from API
-- [ ] display error messages
+- [x] display error messages
 - [ ] add tooltips
 - [x] auto-login after signup
 
