@@ -1,6 +1,6 @@
 import { graphRequest } from "./Request";
 
-export const cancelBookingRequest = (id, token) => {
+export const cancelBookingRequest = (id, token, expfunc) => {
   let requestBody = {
     query: `
             mutation CancelBooking($id: ID!) {
@@ -11,5 +11,5 @@ export const cancelBookingRequest = (id, token) => {
             }`,
     variables: { id: id }
   };
-  return graphRequest(requestBody, token);
+  return graphRequest(requestBody, token, expfunc);
 };

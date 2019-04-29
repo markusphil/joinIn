@@ -32,7 +32,7 @@ export const EventForm = props => {
     }
     props.closeModal();
 
-    createEventRequest(eventInput, props.token)
+    createEventRequest(eventInput, props.token, props.expfunc)
       .then(resData => {
         props.addEvent(resData);
       })

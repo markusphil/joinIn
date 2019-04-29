@@ -1,6 +1,6 @@
 import { graphRequest } from "./Request";
 
-export const bookingsRequest = token => {
+export const bookingsRequest = (token, expfunc) => {
   let requestBody = {
     query: `
            query {
@@ -29,5 +29,5 @@ export const bookingsRequest = token => {
               }
           }`
   };
-  return graphRequest(requestBody, token);
+  return graphRequest(requestBody, token, expfunc);
 };

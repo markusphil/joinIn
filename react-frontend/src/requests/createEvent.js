@@ -1,6 +1,6 @@
 import { graphRequest } from "./Request";
 
-export const createEventRequest = (input, token) => {
+export const createEventRequest = (input, token, expfunc) => {
   let requestBody = {
     query: `
                     mutation CreateEvent ($title: String!, $desc:String!, $location: String!, $date: String!, $teaserimage: String!){
@@ -29,5 +29,5 @@ export const createEventRequest = (input, token) => {
     }
   };
 
-  return graphRequest(requestBody, token);
+  return graphRequest(requestBody, token, expfunc);
 };

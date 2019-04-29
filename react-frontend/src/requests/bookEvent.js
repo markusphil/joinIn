@@ -1,6 +1,6 @@
 import { graphRequest } from "./Request";
 
-export const bookEventRequest = (id, token) => {
+export const bookEventRequest = (id, token, expfunc) => {
   let requestBody = {
     query: `
                mutation BookEvent ($id: ID!) {
@@ -32,5 +32,5 @@ export const bookEventRequest = (id, token) => {
       id: id
     }
   };
-  return graphRequest(requestBody, token);
+  return graphRequest(requestBody, token, expfunc);
 };

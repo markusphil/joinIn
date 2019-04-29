@@ -1,8 +1,13 @@
-export const graphRequest = (body, token) => {
+export const graphRequest = (body, token, expfunc) => {
   const headers = {
     "Content-Type": "application/json"
   };
   if (token) {
+    //ceck if token is Expired before every authorized request
+    const valid = expfunc();
+    if (!valid) {
+      return Promise.reject(new Error("Your token expired!"));
+    }
     headers.Authorization = "Bearer " + token;
   }
   return fetch("http://192.168.178.27:8000/graphql", {

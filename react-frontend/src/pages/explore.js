@@ -77,6 +77,7 @@ class ExplorePage extends Component {
             token={this.context.token}
             addEvent={this.addEventHandler}
             closeModal={this.closeModalHandler}
+            expfunc={this.context.checkExpiration}
           />
         )}
         <div>

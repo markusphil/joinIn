@@ -50,7 +50,11 @@ export const EventDetails = props => {
       return;
     }
 
-    bookEventRequest(context.selectedEvent._id, context.token)
+    bookEventRequest(
+      context.selectedEvent._id,
+      context.token,
+      context.checkExpiration
+    )
       .then(resData => {
         //update the global event state
         let userData = {
@@ -78,7 +82,11 @@ export const EventDetails = props => {
 
   const cancelBookingHandler = async () => {
     //calling request
-    cancelBookingRequest(relatedBooking._id, context.token);
+    cancelBookingRequest(
+      relatedBooking._id,
+      context.token,
+      context.checkExpiration
+    );
     //update the global bookings state
     const updatedBookings = context.bookings.filter(booking => {
       return booking._id !== relatedBooking._id;
