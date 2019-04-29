@@ -55,6 +55,7 @@ class AuthPage extends Component {
         }
       })
       .catch(err => {
+        this.context.updateMessage("error", err.message);
         console.log(err.message);
       });
   };

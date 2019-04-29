@@ -27,6 +27,7 @@ export const EventForm = props => {
       eventInput.date.trim().length === 0 ||
       eventInput.description.trim().length === 0
     ) {
+      props.setMessage("error", "enter valid Data");
       console.log("enter valid Data"); //show real error message here!
       return;
     }
@@ -35,8 +36,10 @@ export const EventForm = props => {
     createEventRequest(eventInput, props.token, props.expfunc)
       .then(resData => {
         props.addEvent(resData);
+        props.setMessage("success", "created Event");
       })
       .catch(err => {
+        props.setMessage("error", err.message);
         console.log(err);
       });
   };

@@ -115,6 +115,7 @@ class GlobalState extends Component {
       text: text
     };
     this.setState({ message: newMessage });
+    setTimeout(this.clearMessage, 5000);
   };
   clearMessage = () => {
     this.setState({ message: { status: null, text: null } });

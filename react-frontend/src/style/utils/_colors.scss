@@ -6,5 +6,7 @@ $secondary: white;
 $text: hsl(200, 2%, 10%);
 $danger: hsl(350, 90%, 50%);
 $danger-dark: mix(black, $danger, 60%);
+$success: hsl(150, 90%, 50%);
+$warning: hsl(39, 95%, 62%);
 $inactive: gray;
 $inactive-dark: mix(black, $inactive, 60%);

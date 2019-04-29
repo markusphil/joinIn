@@ -1,0 +1,21 @@
+.message-container {
+  width: 400px;
+  height: 80px;
+  z-index: z("message");
+  position: fixed;
+  top: 40px;
+  left: calc(50% - 200px);
+  text-align: center;
+  vertical-align: middle;
+  @include border-base;
+  @include shadow-1;
+  &.error {
+    background-color: mix(white, $danger, 50%);
+  }
+  &.warning {
+    background-color: mix(white, $warning, 50%);
+  }
+  &.success {
+    background-color: mix(white, $success, 50%);
+  }
+}

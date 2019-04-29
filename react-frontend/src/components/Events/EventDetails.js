@@ -21,8 +21,6 @@ export const EventDetails = props => {
   const [relatedBooking, setRelatedBooking] = useState(null);
   const [showVisitors, setShowVisitors] = useState(false);
 
-  console.log("Rendering..");
-
   useEffect(() => {
     if (context.selectedEvent.attendees.some(x => x._id === context.userId)) {
       getRelatedBooking();
@@ -72,11 +70,13 @@ export const EventDetails = props => {
         let updatedBookings = [...context.bookings];
         updatedBookings.push(resData.data.bookEvent);
         context.updateBookings(updatedBookings);
-
-        //display message!
+        context.updateMessage(
+          "success",
+          "You joined Event:" + context.selectedEvent.title
+        );
       })
       .catch(err => {
-        console.log(err);
+        context.updateMessage("error", err);
       });
   };
 
@@ -86,7 +86,9 @@ export const EventDetails = props => {
       relatedBooking._id,
       context.token,
       context.checkExpiration
-    );
+    ).catch(err => {
+      context.updateMessage("error", err);
+    });
     //update the global bookings state
     const updatedBookings = context.bookings.filter(booking => {
       return booking._id !== relatedBooking._id;
@@ -102,8 +104,7 @@ export const EventDetails = props => {
       .find(x => x._id === context.selectedEvent._id)
       .attendees.splice(userPosition, 1);
     context.updateEvents(updatedEvents);
-
-    console.log("deleted booking");
+    context.updateMessage("success", "you left the event");
     closeModal();
     //display message
   };

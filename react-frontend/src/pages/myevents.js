@@ -17,20 +17,19 @@ class MyEventsPage extends Component {
 
   componentDidMount() {
     fetchBookings(this.context);
-    this.fetchCreatedEvents();
+    this.context.token && this.fetchCreatedEvents();
   }
 
   fetchCreatedEvents = () => {
     this.context.startLoading();
     createdEventsRequest(this.context.token, this.context.checkExpiration)
       .then(resData => {
-        console.log(resData);
         const fetchedEvents = resData.data.user.createdEvents;
         this.setState({ createdEvents: fetchedEvents });
         this.context.finishLoading();
       })
       .catch(err => {
-        console.log(err);
+        this.context.updateMessage("error", err.message);
         this.context.finishLoading();
       });
   };

@@ -31,13 +31,13 @@ class ExplorePage extends Component {
     eventsRequest()
       .then(resData => {
         const events = resData.data.events;
-        console.log(events);
         if (this.isActive) {
           this.context.updateEvents(events);
           this.context.finishLoading();
         }
       })
       .catch(err => {
+        this.context.updateMessage("error", err.message);
         console.log(err);
         if (this.isActive) {
           this.context.finishLoading();
@@ -78,6 +78,7 @@ class ExplorePage extends Component {
             addEvent={this.addEventHandler}
             closeModal={this.closeModalHandler}
             expfunc={this.context.checkExpiration}
+            setMessage={this.context.updateMessage}
           />
         )}
         <div>

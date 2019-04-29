@@ -11,7 +11,7 @@ export const fetchBookings = context => {
       return fetchedBookings;
     })
     .catch(err => {
-      console.log(err);
+      context.updateMessage("error", err.message);
       context.finishLoading();
     });
 };
