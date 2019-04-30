@@ -3,27 +3,25 @@
   height: 180px;
   margin: 10px;
   background-size: cover;
+  opacity: 0.9;
   @include border-base;
   @include shadow-1;
   cursor: pointer;
   &:hover {
     @include shadow-2;
-    @include border-color;
-    margin: 9px;
-  }
-
-  &.attendee {
-    @include border-wide;
-    margin: 8px;
-    &:hover {
-      @include border-wide-color;
+    opacity: 1;
+    .creator-icon {
+      //fill: $primary;
+      stroke: $primary;
     }
   }
 }
 .event-card-body {
   padding: 5px 20px 5px 40px;
   width: 45%;
-  height: calc(100% - 10px);
+  //extended hight for 1px and set negative margin to remove 1px boundary between card & body
+  height: calc(100% - 9px);
+  margin-right: -1px;
   background-color: rgba($secondary, 0.9);
   float: right;
   @include border-right;
@@ -33,7 +31,7 @@
   }
   clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
 
-  &.creator {
+  &.attendee {
     background-color: rgba($primary, 0.9);
     color: $secondary;
 
@@ -51,4 +49,12 @@
   width: 100%;
   height: 40%;
   font-weight: bold;
+}
+.creator-icon {
+  position: relative;
+  stroke-width: 2px;
+  fill: transparent;
+  stroke: $secondary;
+  left: 4%;
+  top: 80%;
 }

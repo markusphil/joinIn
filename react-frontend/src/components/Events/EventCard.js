@@ -3,15 +3,12 @@ import classnames from "classnames";
 
 import { Textfit } from "react-textfit";
 import { EventInfo } from "./EventDetails/EventInfo";
+import { CreatorIcon } from "../../icons/CreatorIcon";
 
 export const EventCard = props => (
   <li
     key={props.eventId}
-    className={
-      props.attendees.some(x => x._id === props.userId)
-        ? classnames("event-card", "attendee")
-        : "event-card"
-    }
+    className="event-card"
     style={
       props.img
         ? { backgroundImage: `url("${props.img}")` }
@@ -21,10 +18,12 @@ export const EventCard = props => (
     }
     onClick={props.onDetail.bind(this, props.eventId)}
   >
+    {props.userId === props.creatorId && <CreatorIcon />}
     <div
       className={
+        props.attendees.some(x => x._id === props.userId) ||
         props.userId === props.creatorId
-          ? classnames("event-card-body", "creator")
+          ? classnames("event-card-body", "attendee")
           : "event-card-body"
       }
     >
