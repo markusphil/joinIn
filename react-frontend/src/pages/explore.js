@@ -82,7 +82,7 @@ class ExplorePage extends Component {
           />
         )}
         <div>
-          <h1>The Events Page</h1>
+          <h1>Explore upcoming Events</h1>
           {this.context.token && (
             <AddButton type="add-event" action={this.openEventFromHandler} />
           )}

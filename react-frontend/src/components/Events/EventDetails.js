@@ -72,7 +72,7 @@ export const EventDetails = props => {
         context.updateBookings(updatedBookings);
         context.updateMessage(
           "success",
-          "You joined Event: " + context.selectedEvent.title
+          "You joined Event: '" + context.selectedEvent.title + "'"
         );
       })
       .catch(err => {

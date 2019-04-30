@@ -12,9 +12,13 @@
   z-index: 1000;
   @include shadow-1;
 }
-.main-nav-logo h1 {
-  margin: 0;
-  font-size: 1.8rem;
+.main-nav-logo {
+  display: flex;
+
+  h1 {
+    font-size: 1.8rem;
+    margin: 0 20px;
+  }
 }
 .main-nav-items {
   margin-left: 1.5rem;
@@ -39,6 +43,9 @@
     &:focus {
       color: $primary;
     }
+  }
+  .active {
+    color: $primary;
   }
 }
 .main-nav-user {

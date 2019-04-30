@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import GlobalContext from "../../context/main-context";
 import { Avatar } from "../user/Avatar";
+import { Logo } from "./Logo";
 
 export const MainNavigation = props => (
   <GlobalContext.Consumer>
@@ -12,17 +13,21 @@ export const MainNavigation = props => (
       return (
         <header className="main-nav">
           <div className="main-nav-logo">
-            <h1>mobilze</h1>
+            <Logo /> <h1>joinIn</h1>
           </div>
           <nav className="main-nav-items">
             <ul>
               <li>
-                <NavLink to="/explore">Explore</NavLink>
+                <NavLink to="/explore" activeClassName="active">
+                  Explore
+                </NavLink>
               </li>
               {context.token && (
                 <React.Fragment>
                   <li>
-                    <NavLink to="/myevents">MyEvents</NavLink>
+                    <NavLink to="/myevents" activeClassName="active">
+                      MyEvents
+                    </NavLink>
                   </li>
                   <li onClick={context.logout}>
                     <button>Logout</button>
@@ -31,7 +36,9 @@ export const MainNavigation = props => (
               )}
               {!context.token && (
                 <li>
-                  <NavLink to="/auth">Login</NavLink>
+                  <NavLink to="/auth" activeClassName="active">
+                    Login
+                  </NavLink>
                 </li>
               )}
             </ul>
