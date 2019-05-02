@@ -31,7 +31,6 @@ module.exports = {
     let createdEvent;
     try {
       const result = await event.save();
-      console.log(result);
       createdEvent = transformEvent(result);
       const creator = await User.findById(req.userId);
 
