@@ -2,7 +2,7 @@
 
 ## a graphQL/React based event-app
 
-I started following [Max' great tutorial](https://www.youtube.com/watch?v=7giZGFDGnkc&list=PL55RiY5tL51rG1x02Yyj93iypUuHYXcB_) for building a graphQL API and use it in a react fronted.
+I started following [Max' great tutorial](https://www.youtube.com/watch?v=7giZGFDGnkc&list=PL55RiY5tL51rG1x02Yyj93iypUuHYXcB_) for building a graphQL API and use it in a React fronted.
 
 Over time I thought, it would be nice to bring it to a bigger and more complex project... and here it is: **JoinIn** - a simplified meet up clone, that allows you and your friends to create and join public events.
 
