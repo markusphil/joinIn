@@ -1,5 +1,11 @@
 @import "./utils/mixins";
 @import "./utils/colors";
+@import "./utils/config";
+
+.form-title {
+  text-align: center;
+  width: 100%;
+}
 
 .form-input {
   display: flex;
@@ -12,7 +18,11 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 1.2em;
-  width: 45%;
+  width: 90%;
+
+  @media #{break(large)} {
+    width: 45%;
+  }
 }
 
 .form-text-area {
@@ -31,7 +41,8 @@
 }
 
 input {
-  padding: 0.5em;
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
   background-color: rgba($text, 0.1); //$primary-light;
   @include fontdef;
   @include border-base;
@@ -43,7 +54,7 @@ input {
 }
 
 textarea {
-  padding: 0.5em;
+  padding: 0.5rem;
   background-color: rgba($text, 0.1); //$primary-light;
   @include fontdef;
   @include border-base;

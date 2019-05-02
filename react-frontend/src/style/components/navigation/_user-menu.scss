@@ -1,0 +1,31 @@
+.user-menu {
+  position: absolute;
+  top: 0;
+  padding: 60px 20px 0 20px;
+  z-index: z("nav-um");
+
+  @include transparent-bg;
+  @include border-bottom;
+  @include shadow-1;
+
+  @media #{break(small)} {
+    width: 100%;
+  }
+}
+.user-menu-list {
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 0.5rem;
+    text-decoration: none;
+    color: $secondary;
+    font-size: 1.2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      color: $primary;
+    }
+  }
+}

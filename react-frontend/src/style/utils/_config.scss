@@ -4,6 +4,8 @@ $z-layers: (
   "priority-modal": 6000,
   "modal": 5000,
   "backdrop": 4000,
+  "nav-avatar": 3100,
+  "nav-um": 3050,
   "nav": 3000,
   "warning": 1000,
   "default": 1,
@@ -14,4 +16,15 @@ $z-layers: (
   @return map-get($z-layers, $layer);
 }
 
-//Breakpoints...
+//Breakpoints
+
+$breakpoints: (
+  "small": "(max-width: 400px)",
+  "medium": "(min-width: 401px) and (max-width: 800px)",
+  "large": "(min-width: 801px)",
+  "h-small": "(max-height: 400px)"
+);
+
+@function break($size) {
+  @return map-get($breakpoints, $size);
+}

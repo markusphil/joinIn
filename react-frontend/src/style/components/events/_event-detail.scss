@@ -1,12 +1,23 @@
 .event-details-teaser {
-  width: 300px;
-  height: 450px;
+  width: 100%;
+  height: 200px;
+
   background-size: cover;
   background-position: 50% 50%;
-  @include border-left;
+
+  @include border-top;
+  @include vignette;
+  @media #{break(medium)} {
+    height: 300px;
+  }
+
+  @media #{break(large)} {
+    @include border-left;
+    width: 300px;
+    height: 450px;
+  }
 }
 .event-details-body {
-  width: calc(100% - 340px);
   padding: 20px;
   table {
     width: 100%;
@@ -20,5 +31,16 @@
     p {
       margin: 5px;
     }
+  }
+  @media #{break(small)}, #{break(medium)} {
+    .close-icon {
+      stroke: $secondary;
+      &:hover {
+        stroke: $primary;
+      }
+    }
+  }
+  @media #{break(large)} {
+    width: calc(100% - 340px);
   }
 }

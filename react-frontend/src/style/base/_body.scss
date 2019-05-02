@@ -1,17 +1,17 @@
-body {
+html {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  //height: 100vh;
   color: $text;
   @include fontdef;
-  background: linear-gradient(140deg, $contrast 0%, $primary-dark 100%);
+  background: linear-gradient(140deg, $contrast-1 0%, $contrast-2 100%);
+  background-attachment: fixed;
 }
 
 // content wrapper
 .main-content {
   position: relative;
-  top: 100px; //make dependet on navbar!
+  top: 40px;
   margin: auto;
-  max-width: 1700px;
-  padding: 12px;
+  padding: 80px 0;
 }

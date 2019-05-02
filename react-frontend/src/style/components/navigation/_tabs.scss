@@ -8,10 +8,14 @@
   font: inherit;
   border: none;
   background: transparent;
-  color: black;
+  color: $inactive;
   padding: 0 1.25rem;
   border-bottom: solid 2px transparent;
   cursor: pointer;
+  border-bottom: solid 0.1rem $inactive;
+  &:hover {
+    color: $primary;
+  }
 }
 
 .tabs-control button.active {
@@ -20,4 +24,15 @@
 }
 .tabs-control button:focus {
   outline: none;
+}
+
+@media #{break(small)} {
+  .tabs-control {
+    button {
+      padding: 0 0.5rem;
+    }
+    h2 {
+      font-size: 1.3em;
+    }
+  }
 }

@@ -47,8 +47,8 @@ export const EventForm = props => {
   return (
     <React.Fragment>
       <Modal onCancel={props.closeModal}>
-        <h1 className="event-form-title">Add Event</h1>
         <form className="event-form">
+          <h1 className="event-form-title">Add Event</h1>
           <div className="form-input-50">
             <label htmlFor="title">Title</label>
             <input type="text" id="title" ref={titleRef} />

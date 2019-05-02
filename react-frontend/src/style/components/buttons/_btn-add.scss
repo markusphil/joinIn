@@ -6,13 +6,17 @@
 }
 
 .btn-add {
+  position: fixed;
+  left: 5%;
+  bottom: 5%;
   background-color: $primary;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   padding: 0px;
   @include shadow-1;
+  z-index: z("nav");
   cursor: pointer;
   &:hover,
   &:focus {

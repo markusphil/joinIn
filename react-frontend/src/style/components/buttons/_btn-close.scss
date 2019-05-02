@@ -1,5 +1,5 @@
 .close-icon {
-  stroke: $text;
+  stroke: $secondary;
   &:hover,
   &:focus {
     stroke: $primary;
@@ -11,6 +11,6 @@
   background: none;
   border: none;
   position: absolute;
-  top: 22px; //replace magic number
-  right: 15px; //replace magic number
+  top: 8px;
+  right: 5px;
 }

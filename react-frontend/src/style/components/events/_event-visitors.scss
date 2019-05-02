@@ -1,46 +1,76 @@
 .visitors-teaser-box {
-  @include border-base;
-  @include shadow-1;
-  position: absolute;
-  bottom: 20px;
-  left: 150px;
-  transform: translateX(-50%);
-  background-color: rgba($text, 0.95);
   padding: 8px;
   padding-right: 26px;
+
   display: flex;
   flex-direction: row;
-  cursor: pointer;
   text-align: center;
+
+  cursor: pointer;
+
+  background-color: rgba($text, 0.95);
+  @include shadow-1;
+
   .avatar-ring {
     transform: translateX(20px);
     margin-left: -20px;
   }
   p {
-    color: $secondary;
     margin: 0 -18px 0 20px;
+
+    color: $secondary;
     font-size: 1.2rem;
     line-height: 46px;
   }
   &:hover {
     background-color: rgba($primary-dark, 0.95);
   }
+  @media #{break(medium)} {
+    max-width: 200px;
+    position: relative;
+    top: -32px;
+    margin: -32px -5px;
+    @include border-base;
+  }
+  @media #{break(large)} {
+    position: absolute;
+    bottom: 20px;
+    left: 150px;
+    transform: translateX(-50%);
+    @include border-base;
+  }
 }
 .visitors-list-wrapper {
-  background-color: rgba($text, 0.95);
-  height: calc(100% - 60px);
-  color: $secondary;
-  @include border-left;
+  position: absolute;
   padding: 50px 20px 10px 20px;
   overflow: hidden;
+  z-index: z(priority-modal);
+
+  background-color: rgba($text, 0.95);
+  color: $secondary;
+  @include border-base;
   .close-icon {
     stroke: $secondary;
     &:hover {
       stroke: $primary;
     }
   }
-  .btn-close {
-    left: 260px;
+  @media #{break(small)} {
+    height: calc(100% - 60px);
+    width: calc(100% - 40px);
+  }
+  @media #{break(medium)} {
+    height: 240px;
+    width: calc(100% - 40px);
+    @include border-top;
+  }
+  @media #{break(large)} {
+    height: calc(100% - 60px);
+    width: 260px;
+    @include border-left;
+    .btn-close {
+      left: 260px;
+    }
   }
 }
 .visitors-table {

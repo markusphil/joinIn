@@ -68,6 +68,13 @@ class GlobalState extends Component {
     localStorage.setItem("tokenExpiration", tokenExpirationTime);
   };
 
+  changeUserInfo = profilePic => {
+    this.setState({
+      profilePic: profilePic
+    });
+    localStorage.setItem("profilePic", profilePic);
+  };
+
   logout = () => {
     this.setState({
       token: null,
@@ -131,6 +138,7 @@ class GlobalState extends Component {
           profilePic: this.state.profilePic,
           login: this.login,
           logout: this.logout,
+          changeUserInfo: this.changeUserInfo,
           checkExpiration: this.checkExpiration,
           isLoading: this.state.isLoading,
           startLoading: this.startLoading,
