@@ -12,7 +12,7 @@ export const EventInfo = props => (
           <LocationIcon />
         </td>
         <td>
-          <Textfit max={14} className="location-text">
+          <Textfit min={8} max={14} className="location-text">
             {props.location}
           </Textfit>
         </td>

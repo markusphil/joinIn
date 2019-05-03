@@ -8,6 +8,7 @@ const modal = props => (
       <div className="close-btn-wrapper" onClick={props.onCancel}>
         <CloseButton type="close" />
       </div>
+
       {props.children}
     </div>
   </React.Fragment>

@@ -5,9 +5,9 @@
   background-size: cover;
   background-position: 50% 50%;
 
-  @include border-top;
   @include vignette;
   @media #{break(medium)} {
+    @include border-top;
     height: 300px;
   }
 
@@ -33,6 +33,7 @@
     }
   }
   @media #{break(small)}, #{break(medium)} {
+    height: calc(100% - 266px);
     .close-icon {
       stroke: $secondary;
       &:hover {

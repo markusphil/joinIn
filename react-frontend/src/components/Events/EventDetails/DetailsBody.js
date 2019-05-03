@@ -1,8 +1,10 @@
 import React from "react";
-import SimpleBar from "simplebar-react";
 import { VistorTeaser } from "./VisitorTeaser";
 import { VistorList } from "./VisitorList";
 import { EventInfo } from "./EventInfo";
+import SimpleBar from "simplebar-react";
+
+import "simplebar/dist/simplebar.min.css";
 
 export const DetailsBody = props => (
   <React.Fragment>
@@ -28,8 +30,8 @@ export const DetailsBody = props => (
         showVisitorsHandler={props.showVisitorsHandler}
       />
     )}
-    <SimpleBar style={{ height: "100%" }}>
-      <div className="event-details-body">
+    <div className="event-details-body">
+      <SimpleBar style={{ height: "100%", width: "100%" }}>
         <h1>{props.selectedEvent.title}</h1>
         <table>
           <tbody>
@@ -58,7 +60,7 @@ export const DetailsBody = props => (
         </table>
 
         <p>{props.selectedEvent.description}</p>
-      </div>
-    </SimpleBar>
+      </SimpleBar>
+    </div>
   </React.Fragment>
 );
