@@ -80,7 +80,7 @@ Starting from the tutorial I planed/made following changes:
 - [ ] add tooltips
 - [x] auto-login after signup
 
-\*I am totaly aware that storing the token localy is a serious security issue. But for sake of simplicity I choose to stick to this solution. Aspecialy as I am not handeling any private Data (except the token itself).
+\*I am totaly aware that storing the token locally is a security issue. But for sake of simplicity I choose to stick to this solution. Especially as I am not handeling any private Data (except the token itself).
 
 ### Testing
 
