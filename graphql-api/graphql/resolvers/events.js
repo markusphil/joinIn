@@ -2,7 +2,7 @@
 const Event = require("../../models/event");
 const User = require("../../models/user");
 //Import helpers
-const { transformEvent } = require("./utils");
+const { transformEvent, userLoader } = require("./utils");
 
 module.exports = {
   events: async () => {
@@ -39,7 +39,7 @@ module.exports = {
       }
       creator.createdEvents.push(event._id); //let mongoose handle the update of the user
       await creator.save();
-
+      userLoader.clearAll();
       return createdEvent;
     } catch (err) {
       console.log(err);

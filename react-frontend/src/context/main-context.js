@@ -6,7 +6,7 @@ export default React.createContext({
   userName: null,
   profilePic: null,
   login: (token, userId, userName, profilePic, tokenExpiration) => {},
-  changeUserInfo: profilePic => {},
+  updateUserInfo: profilePic => {},
   logout: () => {},
   checkExpiration: () => {},
   isLoading: false,

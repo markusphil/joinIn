@@ -13,6 +13,7 @@ const eventLoader = new DataLoader(eventIds => {
   return events(eventIds);
 });
 const userLoader = new DataLoader(userIds => {
+  console.log("new Userloader" + userIds);
   return users(userIds);
 });
 
@@ -89,6 +90,7 @@ const singleEvent = async eventId => {
     throw err;
   }
 };
+
 const singleUser = async userId => {
   try {
     const user = await userLoader.load(userId);
@@ -101,3 +103,4 @@ const singleUser = async userId => {
 exports.transformEvent = transformEvent;
 exports.transformBooking = transformBooking;
 exports.singleUser = singleUser;
+exports.userLoader = userLoader;

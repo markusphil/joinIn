@@ -1,10 +1,10 @@
 import { graphRequest } from "./Request";
 
-export const changeUserInfoRequest = (profilePic, token, expfunc) => {
+export const updateUserInfoRequest = (profilePic, token, expfunc) => {
   let requestBody = {
     query: `
-            mutation changeUserInfo($profilePic: String!) {
-                changeUserInfo(profilePic: $profilePic) {
+            mutation updateUserInfo($profilePic: String!) {
+                updateUserInfo(profilePic: $profilePic) {
                     profilePic      
                 }
             }`,

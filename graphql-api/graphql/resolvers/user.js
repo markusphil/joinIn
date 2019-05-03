@@ -2,7 +2,7 @@
 const User = require("../../models/user");
 
 //Import helpers
-const { singleUser } = require("./utils");
+const { singleUser, userLoader } = require("./utils");
 
 module.exports = {
   user: async (args, req) => {
@@ -10,13 +10,14 @@ module.exports = {
       throw new Error("You must be logged in see created Events");
     }
     try {
-      return (user = await singleUser(req.userId));
+      const user = await singleUser(req.userId);
+      return user;
     } catch (err) {
       throw err;
     }
   },
 
-  changeUserInfo: async (args, req) => {
+  updateUserInfo: async (args, req) => {
     if (!req.isAuth) {
       throw new Error("You must be logged in to change user info");
     }
@@ -24,6 +25,7 @@ module.exports = {
       const updatedUser = await User.findById(req.userId);
       updatedUser.profilePic = args.profilePic;
       const result = await updatedUser.save();
+      userLoader.clearAll();
       return { ...result._doc, password: null, _id: result.id };
     } catch (err) {
       throw err;
