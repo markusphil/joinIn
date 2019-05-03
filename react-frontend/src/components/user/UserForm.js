@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 
 import Modal from "../core/Modal";
 import { Button } from "../buttons/ButtonMain";
-import { changeUserInfoRequest } from "../../requests/changeUserInfo";
+import { updateUserInfoRequest } from "../../requests/updateUserInfo";
 
 export const UserForm = props => {
   //using Hooks for Refs
@@ -19,13 +19,13 @@ export const UserForm = props => {
     }
     props.closeModal();
 
-    changeUserInfoRequest(
+    updateUserInfoRequest(
       userInput.profilePic,
       props.context.token,
       props.context.checkExpiration
     )
       .then(resData => {
-        props.context.changeUserInfo(resData.data.changeUserInfo.profilePic);
+        props.context.updateUserInfo(resData.data.updateUserInfo.profilePic);
         props.context.updateMessage("success", "updated User Info");
       })
       .catch(err => {
