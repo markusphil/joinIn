@@ -8,19 +8,20 @@ Over time I thought, it would be nice to bring it to a bigger and more complex p
 
 It includes the following technologies & libraries:
 
-| Backend | Frontend |
-| ------- | -------- |
+### Backend
 
-
-| - node.js
-
+- node.js
 - express
 - graphQL
 - mongoDB
 - [mongoose](https://mongoosejs.com/)
 - [DataLoader](https://github.com/graphql/dataloader)
 - [jwt](https://github.com/auth0/node-jsonwebtoken)
-- [bcrypt](https://github.com/kelektiv/node.bcrypt.js) | - react
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+
+### Frontend
+
+- react
 - react-router
 - [classnames](https://github.com/JedWatson/classnames#readme)
 - [react-textfit](https://github.com/JedWatson/classnames#readme)
