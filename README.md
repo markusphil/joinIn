@@ -8,19 +8,19 @@ Over time I thought, it would be nice to bring it to a bigger and more complex p
 
 It includes the following technologies & libraries:
 
-### Backend
+| Backend | Frontend |
+| ------- | -------- |
 
-- node.js
+
+| - node.js
+
 - express
 - graphQL
 - mongoDB
 - [mongoose](https://mongoosejs.com/)
+- [DataLoader](https://github.com/graphql/dataloader)
 - [jwt](https://github.com/auth0/node-jsonwebtoken)
-- [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
-
-### Frontend
-
-- react
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js) | - react
 - react-router
 - [classnames](https://github.com/JedWatson/classnames#readme)
 - [react-textfit](https://github.com/JedWatson/classnames#readme)
@@ -44,7 +44,7 @@ Starting from the tutorial I planed/made following changes:
 - [x] add User-createdEvents query
 - [ ] add update event mutation
 - [ ] add delete event mutation
-- [ ] add update user mutation
+- [x] add update user mutation
 
 ### Frontend
 
@@ -59,7 +59,7 @@ Starting from the tutorial I planed/made following changes:
 - [x] store token locally\*
 - [x] handle token expiration
 - [x] access user/event images
-- [ ] add User menu
+- [x] add User menu
 - [x] add visior list
 - [ ] add edit event form
 - [x] basic styling
@@ -73,6 +73,7 @@ Starting from the tutorial I planed/made following changes:
   - [x] Event Details
   - [x] Visitor List
   - [x] Event Form
+  - [x] make it responsive
 - [x] catch errors from API
 - [x] display error messages
 - [ ] add tooltips
@@ -94,11 +95,10 @@ Starting from the tutorial I planed/made following changes:
 
 ### Design
 
-- [ ] chose color palette
+- [x] chose color palette
 - [x] finde name
 - [x] create generic Logo
 - [x] add icons
-- [ ] design overhaul
 
 ## Future additions
 
@@ -107,3 +107,4 @@ Starting from the tutorial I planed/made following changes:
 - add animations (GSAP)
 - add welcome page
 - add user pages
+- design overhaul
