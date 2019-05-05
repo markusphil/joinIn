@@ -1,13 +1,17 @@
 {
-  "name": "graphql-event-api",
-  "version": "1.0.0",
-  "description": "",
+  "name": "joinin",
+  "version": "0.6.0",
+  "description": "a graphQL and React based event App",
+  "engines": {
+    "node": "10.x"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon graphql-api",
+    "build": "cd react-frontend/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "author": "",
+  "author": "Markus Philipp",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

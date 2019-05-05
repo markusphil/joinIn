@@ -10,7 +10,7 @@ export const graphRequest = (body, token, expfunc) => {
     }
     headers.Authorization = "Bearer " + token;
   }
-  return fetch("http://192.168.178.27:8000/graphql", {
+  return fetch("/graphql", {
     method: "POST",
     body: JSON.stringify(body),
     headers: headers
