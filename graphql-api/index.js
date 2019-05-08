@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 //add custombuild authentification-middleware
 app.use(isAuth);
 
-//priority server static react files
+//priority serve static react files
 app.use(express.static(path.resolve(__dirname, "../react-frontend/build")));
 //configure graphQL with shema and resolvers
 app.use(
