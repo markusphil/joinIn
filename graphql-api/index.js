@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql");
 const mongoose = require("mongoose");
+const path = require("path");
 //Import middleware
 const isAuth = require("./middleware/is-auth");
 //Import schema
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
 app.use(isAuth);
 
 //priority server static react files
-//app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
+app.use(express.static(path.resolve(__dirname, "../react-frontend/build")));
 //configure graphQL with shema and resolvers
 app.use(
   "/graphql",
