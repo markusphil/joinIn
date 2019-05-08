@@ -13,7 +13,6 @@ const eventLoader = new DataLoader(eventIds => {
   return events(eventIds);
 });
 const userLoader = new DataLoader(userIds => {
-  console.log("new Userloader" + userIds);
   return users(userIds);
 });
 
