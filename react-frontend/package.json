@@ -33,5 +33,5 @@
     "cypress": "^3.2.0",
     "eslint-plugin-cypress": "^2.2.1"
   },
-  "proxy": "http://192.168.178.27:8000"
+  "proxy": "localhost:8000"
 }
