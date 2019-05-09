@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "description": "a graphQL and React based event App",
   "engines": {
-    "node": "10.x"
+    "node": "11.6.0"
   },
   "cacheDirectories": [
     "node_modules",
