@@ -35,10 +35,19 @@ class AuthPage extends Component {
       formData.name.trim().length <= 3 ||
       formData.password.trim().length <= 3
     ) {
+      this.context.updateMessage("error", "enter valid credentials");
       return;
     }
     if (!this.state.isLogin) {
       formData.profilePic = this.profilePicRef.current.value;
+      //simple check if image is URL
+      if (
+        formData.profilePic.length > 0 &&
+        formData.profilePic.substring(0, 4) !== "http"
+      ) {
+        this.context.updateMessage("error", "enter valid URL");
+        return;
+      }
     }
 
     authRequest(formData, this.state.isLogin)

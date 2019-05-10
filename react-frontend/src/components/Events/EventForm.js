@@ -28,9 +28,15 @@ export const EventForm = props => {
       eventInput.description.trim().length === 0
     ) {
       props.setMessage("error", "enter valid Data");
-      console.log("enter valid Data"); //show real error message here!
+      return;
+    } else if (
+      eventInput.teaserImage.length > 0 &&
+      eventInput.teaserImage.substring(0, 4) !== "http"
+    ) {
+      props.setMessage("error", "enter valid URL");
       return;
     }
+
     props.closeModal();
 
     createEventRequest(eventInput, props.token, props.expfunc)
