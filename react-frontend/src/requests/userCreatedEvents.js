@@ -12,12 +12,7 @@ export const createdEventsRequest = (token, expfunc) => {
                         description
                         date
                         location
-                        teaserImage
-                        creator {
-                          _id
-                          name
-                          profilePic
-                        } 
+                        teaserImage 
                         attendees {
                             _id
                             name

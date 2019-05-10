@@ -25,6 +25,13 @@ class MyEventsPage extends Component {
     createdEventsRequest(this.context.token, this.context.checkExpiration)
       .then(resData => {
         const fetchedEvents = resData.data.user.createdEvents;
+        const creatorData = {
+          _id: this.context.userId,
+          name: this.context.userName,
+          profilePic: this.context.profilePic
+        };
+        fetchedEvents.map(event => (event.creator = creatorData));
+
         this.setState({ createdEvents: fetchedEvents });
         this.context.finishLoading();
       })
