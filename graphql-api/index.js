@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 app.use(isAuth);
 
 //priority serve static react files
-app.use(express.static(path.resolve(__dirname, "../react-frontend/build")));
+//app.use(express.static(path.resolve(__dirname, "../react-frontend/build")));
 //configure graphQL with shema and resolvers
 app.use(
   "/graphql",
@@ -44,21 +44,14 @@ app.use(
   })
 );
 //return react app for all remaining request
-app.get("*", (req, res) => {
+/* app.get("*", (req, res) => {
   res.sendFile(
     path.resolve(__dirname, "../react-frontend/build", "index.html")
   );
-});
-//${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD} Parsing the passwort via env is not working somehow!
+}); */
 //Use mongoose to connect with MongoDB cluster
 mongoose
-  .connect(
-    `mongodb+srv://${
-      process.env.MONGO_USER
-    }:kH7ZFUffTx3R9v0q@graphql-tutorial-egoz3.mongodb.net/${
-      process.env.MONGO_DB
-    }?retryWrites=true`
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     app.listen(8000);
   })
