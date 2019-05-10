@@ -2,7 +2,7 @@
 const Event = require("../../models/event");
 const Booking = require("../../models/booking");
 //Import helpers
-const { transformBooking, transformEvent } = require("./utils");
+const { transformBooking, transformEvent, eventLoader } = require("./utils");
 
 module.exports = {
   bookings: async (args, req) => {
@@ -33,6 +33,7 @@ module.exports = {
     const result = await booking.save();
     fetchedEvent.attendees.push(req.userId);
     await fetchedEvent.save();
+    eventLoader.clearAll();
     return transformBooking(result);
   },
   cancelBooking: async (args, req) => {
@@ -47,6 +48,7 @@ module.exports = {
       );
       await unbookedEvent.save();
       await Booking.deleteOne({ _id: args.bookingId });
+      eventLoader.clearAll();
       return transformEvent(unbookedEvent);
     } catch (err) {
       throw err;

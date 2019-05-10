@@ -8,13 +8,19 @@ const { dateToString } = require("../../helpers/date");
 const Event = require("../../models/event");
 const User = require("../../models/user");
 
-//Loaders
+//constant Loaders
 const eventLoader = new DataLoader(eventIds => {
   return events(eventIds);
 });
 const userLoader = new DataLoader(userIds => {
   return users(userIds);
 });
+/*Dataloaders are currently used as consistent cache, which is cleared everytime an object gets modifed.
+This is however not the intended use of Dataloaders, instead they are recomended to be used as short lived cache for every request.
+I inherited this usage of Dataloaders from the tutorial I followed, and it is working quite good in reducing the amout of needed DB Requests.
+To use the Dataloaders the intended way would requiere some serious rework of the API and also some additional extensions, to get the full caching functionalities.
+Which is why I decided to stick to this "misuse" of Dataloaders for this demo-project.
+*/
 
 //output transformations
 const transformEvent = event => {
@@ -103,3 +109,4 @@ exports.transformEvent = transformEvent;
 exports.transformBooking = transformBooking;
 exports.singleUser = singleUser;
 exports.userLoader = userLoader;
+exports.eventLoader = eventLoader;
