@@ -23,7 +23,8 @@
   height: calc(100% - 10px);
 
   padding: 5px 20px 5px 40px;
-  margin: 0;
+  //right margin -1px to prevent small border
+  margin: 0 -1px 0 0;
   float: right;
 
   background-color: rgba($secondary, 0.9);
