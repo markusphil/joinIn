@@ -2,9 +2,10 @@ import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 //Import Pages
-import AuthPage from "./auth";
+import AuthPage from "./Auth";
 import MyEventsPage from "./myevents";
 import ExplorePage from "./explore";
+import AboutPage from "./About";
 
 //Import Context
 import GlobalContext from "../context/main-context";
@@ -32,6 +33,7 @@ export const Routes = () => (
               <Route path="/myevents" component={MyEventsPage} />
             )}
             <Route path="/explore" component={ExplorePage} />
+            <Route path="/about" component={AboutPage} />
             {!context.token && <Redirect to="/auth" exact />}
           </Switch>
         </React.Fragment>

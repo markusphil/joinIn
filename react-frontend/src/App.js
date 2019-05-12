@@ -6,6 +6,7 @@ import { MainNavigation } from "./components/navigation/Navbar";
 //Import Statemanager + Context
 import GlobalState from "./context/GlobalState";
 import { Routes } from "./pages/routing";
+import { Footer } from "./components/navigation/Footer";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <main className="main-content">
               <Routes />
             </main>
+            <Footer />
           </GlobalState>
         </React.Fragment>
       </BrowserRouter>
