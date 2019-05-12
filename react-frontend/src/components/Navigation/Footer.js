@@ -7,6 +7,11 @@ export const Footer = () => {
       <NavLink to="/about" activeClassName="active">
         About
       </NavLink>
+      <p>
+        made to learn by{" "}
+        <a href="https://github.com/markusphil">Markus Philipp</a> (April - May
+        2019)
+      </p>
     </footer>
   );
 };

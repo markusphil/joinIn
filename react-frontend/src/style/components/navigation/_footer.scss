@@ -1,8 +1,16 @@
 footer {
-  background-color: $secondary;
+  z-index: z("nav-um");
+  position: relative;
+  background-color: $text;
   width: calc(100% - 40px);
   padding: 20px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  height: 150px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: $secondary;
+    padding: 20px;
+  }
 }
