@@ -1,5 +1,6 @@
 //Import models
 const Event = require("../../models/event");
+const User = require("../../models/user");
 const Booking = require("../../models/booking");
 //Import helpers
 const { transformBooking, transformEvent, eventLoader } = require("./utils");
@@ -21,6 +22,10 @@ module.exports = {
   bookEvent: async (args, req) => {
     if (!req.isAuth) {
       throw new Error("You must be logged in to join an event");
+    }
+    const user = await User.findById(req.userId);
+    if (!user) {
+      throw new Error("Invalid user ID. Please logout and register again");
     }
     const fetchedEvent = await Event.findOne({ _id: args.eventId });
     if (fetchedEvent.attendees.some(x => x == req.userId)) {

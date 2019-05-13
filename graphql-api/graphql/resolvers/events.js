@@ -20,6 +20,10 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error("You must be logged in to create an event");
     }
+    const user = await User.findById(req.userId);
+    if (!user) {
+      throw new Error("Invalid user ID. Please logout and register again");
+    }
     const event = new Event({
       title: args.eventInput.title,
       description: args.eventInput.description,

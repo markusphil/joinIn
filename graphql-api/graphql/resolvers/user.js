@@ -9,6 +9,10 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error("You must be logged in see created Events");
     }
+    const user = await User.findById(req.userId);
+    if (!user) {
+      throw new Error("Invalid user ID. Please logout and register again");
+    }
     try {
       const user = await singleUser(req.userId);
       return user;
