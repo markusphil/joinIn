@@ -6,6 +6,8 @@ I started following [Max' great tutorial](https://www.youtube.com/watch?v=7giZGF
 
 Over time I thought, it would be nice to bring it to a bigger and more complex project... and here it is: **JoinIn** - a simplified meet up clone, that allows you and your friends to create and join public events.
 
+Check out [the current Demo](https://joinin-graphql.herokuapp.com/explore).
+
 It includes the following technologies & libraries:
 
 ### Backend
